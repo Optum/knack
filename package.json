@@ -1,0 +1,23 @@
+{
+  "name": "knack-packages",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.14.1"
+  },
+  "xo": {
+    "rules": {
+      "unicorn/catch-error-name": [
+        "error",
+        {
+          "caughtErrorsIgnorePattern": "^_$"
+        }
+      ],
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "camelCase"
+        }
+      ]
+    }
+  }
+}

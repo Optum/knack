@@ -1,0 +1,56 @@
+{
+  "name": "knack-producer",
+  "version": "0.0.0",
+  "description": "A module for publishing to Apache Kafka.",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "repository": "optum/knack",
+  "author": {
+    "name": "lxghtless",
+    "email": "william.kurth@optum.com",
+    "url": "github.com/lxghtless"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "test": "xo && nyc ava"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "kafka"
+  ],
+  "dependencies": {
+    "node-rdkafka": "^2.6.1",
+    "p-event": "^4.1.0"
+  },
+  "devDependencies": {
+    "ava": "^1.4.1",
+    "nyc": "^14.1.0",
+    "xo": "^0.24.0"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  },
+  "xo": {
+    "rules": {
+      "unicorn/catch-error-name": [
+        "error",
+        {
+          "caughtErrorsIgnorePattern": "^_$"
+        }
+      ]
+    }
+  }
+}
