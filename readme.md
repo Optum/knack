@@ -28,5 +28,13 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [<b>`knack-sr`</b>](packages/knack-producer-sr) | 1.0.0 |
 | [<b>`knack-cli`</b>](packages/knack-cli) | 1.0.0 |
 
+## Development
+
+initialize lerna for all packages
+
+```shell
+$ lerna init
+$ lerna bootstrap
+```
 
 © Optum 2019

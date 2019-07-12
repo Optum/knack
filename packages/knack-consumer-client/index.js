@@ -9,8 +9,9 @@ const defaultConsumerConfig = {
 	'client.id': 'my-kafka-client-v1',
 	'group.id': 'my-kafka-group-v1',
 	'metadata.broker.list': 'localhost:9092',
-	'enable.auto.commit': false,
-	'socket.keepalive.enable': true
+	'enable.auto.commit': true,
+	'socket.keepalive.enable': true,
+	'auto.offset.reset': 'beginning'
 };
 
 let log = console;
@@ -39,6 +40,7 @@ const connect = async config => {
 
 	const onData = async record => {
 		try {
+			log.info('got a message');
 			// TODO: update parseRecord call param to adhere to the following model
 			// by use the record.topic to attempt to get the schema from knack-sr
 			// {keySchema, valueSchema, key, value}

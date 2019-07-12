@@ -1,56 +1,42 @@
-const KafkaConsumerClient = require('.');
+const knackConsumerClient = require('.');
 
-const defaultOptions = {
-	protocol: 'http',
-	domain: 'localhost:8081',
-	config: {
-		'metadata.broker.list': ['localhost:9092'],
-		debug: 'all',
-		// eslint-disable-next-line camelcase
-		event_cb: true
-	},
-	topicConfig: {}
+const defaultConsumerConfig = {
+	'client.id': 'my-kafka-client-v1',
+	'group.id': 'my-kafka-group-v1',
+	'metadata.broker.list': 'localhost:9092',
+	'enable.auto.commit': true,
+	'socket.keepalive.enable': true,
+	'auto.offset.reset': 'smallest'
 };
 
-// Const count = 5;
 const topic = 'test-client-topic-v1';
-
-const delay = async () => {
-	return new Promise(resolve => {
-		setTimeout(() => {
-			resolve();
-		}, 5000);
-	});
-};
-
-process.on('uncaughtException', error => {
-	console.log(error);
-});
-
-process.on('unhandledRejection', (reason, p) => {
-	console.log(reason, p);
-});
 
 const main = async () => {
 	try {
-		const handler = async (key, value) => {
+		const handler = async ({key, value, timestamp, topic}) => {
 			console.log('key', key);
 			console.log('value', value);
+			console.log('timestamp', timestamp);
+			console.log('topic', topic);
 		};
 
 		const subscription = {
 			topic,
-			handler,
-			flowMode: false,
-			consumeCount: 1
+			handler
+			// TODO: impl topic level flow settings
+			// flowMode: false,
+			// consumeCount: 1
 		};
 
 		console.log('connecting consumer...');
-		await KafkaConsumerClient.connectAndWire(subscription, defaultOptions);
-		console.log('consumer connected.');
 
-		console.log('waiting for messages...');
-		await delay();
+		await knackConsumerClient.connect({
+			subscriptions: [subscription],
+			flowMode: true,
+			consumerConfig: defaultConsumerConfig
+		});
+
+		console.log('consumer connected');
 	} catch (error) {
 		console.log(error);
 	}

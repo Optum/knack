@@ -8,8 +8,9 @@ const defaultConsumerConfig = {
 	'client.id': 'my-kafka-client-v1',
 	'group.id': 'my-kafka-group-v1',
 	'metadata.broker.list': 'localhost:9092',
-	'enable.auto.commit': false,
-	'socket.keepalive.enable': true
+	'enable.auto.commit': true,
+	'socket.keepalive.enable': true,
+	'auto.offset.reset': 'beginning'
 };
 
 let log = console;
@@ -40,7 +41,6 @@ const connect = async config => {
 
 	return new Promise((resolve, reject) => {
 		consumer = new Kafka.KafkaConsumer(config.consumerConfig, {});
-
 		consumer.on('ready', () => {
 			consumer.subscribe(topics);
 
