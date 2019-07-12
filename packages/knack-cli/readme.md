@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://kafka.apache.org/">
-    <img alt="react-router" src="../../.github/assets/kafka-sketch-logo.png" width="200">
-  </a>
-</p>
-
 <h2 align="center">
   node-kafka-cli
 </h2>
