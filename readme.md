@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://kafka.apache.org/">
-    <img alt="react-router" src=".github/assets/knack-banner.png">
+    <img alt="knack" src=".github/assets/knack-banner.png">
   </a>
 </p>
 
