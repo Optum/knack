@@ -44,5 +44,8 @@ initialize lerna for all packages
 $ lerna init
 $ lerna bootstrap
 ```
+## Contributing to the Project
+
+The Knack team is open to contributions to our project. For more details, see our [Contribution Guide](docs/CONTRIBUTING.md).
 
 © Optum 2019
