@@ -7,7 +7,7 @@
 
 We're thrilled that you'd like to contribute to this project. Your support of this project directly contributes the mission of Optum and UHG to help people live healthier lives and to help make the health system work better for everyone.
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.  Please review our [Individual Contributor License Agreement ("ICL")](\docs\INDIVIDUAL_CONTRIBUTOR_LICENSE.md) prior to submitting changes to the project.
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.  Please review our [Individual Contributor License Agreement ("ICL")](/docs/INDIVIDUAL_CONTRIBUTOR_LICENSE.md) prior to submitting changes to the project.
 
 > :bulb:  Our ICL requires contributors to `sign-off` on each commit.  Adding an alias to the project will make this easier. ```git config --local format.signoff true``` 
 
