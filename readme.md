@@ -22,12 +22,19 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [<b>`knack-avro`</b>](packages/knack-avro) | 1.0.0 |
 |A module for encoding and decoding avro with Kafka.|
 | [<b>`knack-client`</b>](packages/knack-client) |  1.0.0 |
+|A module for interacting with Apache Kafka.|
 | [<b>`knack-consumer`</b>](packages/knack-consumer) | 1.0.0 |
+|A module for consuming messages from Apache Kafka.|
 | [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | 1.0.0 |
+|A module for consuming records with Apache Kafka.|
 | [<b>`knack-producer`</b>](packages/knack-producer) | 1.0.0 |
+|A module for publishing to Apache Kafka.|
 | [<b>`knack-producer-client`</b>](packages/knack-producer-client) | 1.0.0 |
-| [<b>`knack-sr`</b>](packages/knack-producer-sr) | 1.0.0 |
+|A module for producing records with Apache Kafka.|
+| [<b>`knack-sr`</b>](packages/knack-sr) | 1.0.0 |
+|A module for interacting with the Kafka Schema Registry.|
 | [<b>`knack-cli`</b>](packages/knack-cli) | 1.0.0 |
+|A cli for working with Apache Kafka development.|
 
 ## Development
 
