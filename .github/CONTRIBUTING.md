@@ -24,6 +24,10 @@ Please follow these steps to have your contribution considered by the maintainer
 
 1. [Fork][fork] and clone the repository
 1. Make your change
+      1. Sign-off every commit `git commit --signoff` or `git commit -s`, as directed by the [ICL](/docs/INDIVIDUAL_CONTRIBUTOR_LICENSE.md).
+
+> :grey_exclamation: If you forget to sign a commit, then you'll have to do a bit of rewriting history. Don't worry. It's pretty easy. If it's the latest commit, you can just run either `git commit -a -s` or `git commit --amend --signoff` to fix things. It gets a little trickier if you have to change something farther back in history but there are some good instructions {git-rewrite}[here] in the Changing Multiple Commit Messages section.
+
 1. Push to your fork and [submit a pull request](https://help.github.com/en/articles/creating-a-pull-request)
 1. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
 1. Follow the [styleguides](#styleguides)
