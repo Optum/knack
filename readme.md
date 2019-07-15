@@ -20,6 +20,7 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | name  |  version |
 |---|---|
 | [<b>`knack-avro`</b>](packages/knack-avro) | 1.0.0 |
+|A module for encoding and decoding avro with Kafka.|
 | [<b>`knack-client`</b>](packages/knack-client) |  1.0.0 |
 | [<b>`knack-consumer`</b>](packages/knack-consumer) | 1.0.0 |
 | [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | 1.0.0 |
