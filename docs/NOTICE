@@ -7,4 +7,9 @@ A streamlined wrapper around node-rdkafka made with independent compossible part
 Enables easy interaction with Kafka procducers, consumers and the schema registry.
 
 Author:
+=======
 William Kurth (@lxghtless)
+
+Dependencies:
+=============
+https://github.com/Optum/knack/network/dependencies
