@@ -9,7 +9,7 @@ We're thrilled that you'd like to contribute to this project. Your support of th
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-| :bulb: | Our ICL requires contributors to `sign-off` on each commit.  Adding an alias to the project will make this easier. ```git config --local format.signoff true``` |
+> :bulb:  Our ICL requires contributors to `sign-off` on each commit.  Adding an alias to the project will make this easier. ```git config --local format.signoff true``` 
 
 ### Pull Requests
 
