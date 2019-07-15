@@ -1,0 +1,10 @@
+Knack
+Copyright 2019 Optum
+
+Project Description:
+====================
+A streamlined wrapper around node-rdkafka made with independent compossible parts.  
+Enables easy interaction with Kafka procducers, consumers and the schema registry.
+
+Author:
+William Kurth (@lxghtless)
