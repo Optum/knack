@@ -29,7 +29,10 @@
     "kafka"
   ],
   "devDependencies": {
-    "ava": "^1.4.1",
+    "ava": "^2.2.0",
+    "lodash": ">=4.17.13",
+    "lodash.merge": ">=4.6.2",
+    "lodash.mergewith": ">=4.6.2",
     "nyc": "^14.1.0",
     "xo": "^0.24.0"
   },
