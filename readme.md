@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A streamlined wrapper around <a href="https://github.com/Blizzard/node-rdkafka">node-rdkafka</a> made with independent compossible parts.
+  A streamlined wrapper around <a href="https://github.com/Blizzard/node-rdkafka">node-rdkafka</a> made with independent composable parts.
 </p>
 
 <p align="center">
