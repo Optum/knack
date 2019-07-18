@@ -1,5 +1,5 @@
 <h2 align="center">
-  node-kafka-avro
+  knack-avro
 </h2>
 
 <p align="center">
@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i node-kafka-avro
+$ npm i knack-avro
 ```
 

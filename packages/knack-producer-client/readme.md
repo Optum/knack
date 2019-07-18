@@ -1,9 +1,9 @@
 <h2 align="center">
-  node-kafka-producer-client
+  knack-producer-client
 </h2>
 
 <p align="center">
-  A module for producing records with Apache Kafka.
+  A module for producing Apache Kafka records.
 </p>
 
 <p align="center">
@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i node-kafka-producer-client
+$ npm i knack-producer-client
 ```
 

@@ -30,7 +30,7 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [<b>`knack-producer`</b>](packages/knack-producer) | 1.0.0 |
 |A module for publishing to Apache Kafka.|
 | [<b>`knack-producer-client`</b>](packages/knack-producer-client) | 1.0.0 |
-|A module for producing records with Apache Kafka.|
+|A module for producing Apache Kafka records.|
 | [<b>`knack-sr`</b>](packages/knack-sr) | 1.0.0 |
 |A module for interacting with the Kafka Schema Registry.|
 | [<b>`knack-cli`</b>](packages/knack-cli) | 1.0.0 |
@@ -44,6 +44,11 @@ initialize lerna for all packages
 $ lerna init
 $ lerna bootstrap
 ```
+
+## Examples
+
+Initial working code examples can be found in the [<b>`knack-cli/cmds`</b>](packages/knack-cli) folder.
+
 ## Contributing to the Project
 
 The Knack team is open to contributions to our project. For more details, see our [Contribution Guide](.github/CONTRIBUTING.md).

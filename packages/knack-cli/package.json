@@ -21,9 +21,13 @@
   "scripts": {
     "test": "xo && nyc ava"
   },
+  "bin": {
+    "knack": "./cli.js"
+  },
   "files": [
     "index.js",
-    "cli.js"
+    "cli.js",
+    "cmds"
   ],
   "keywords": [
     "kafka"
@@ -49,7 +53,24 @@
         {
           "caughtErrorsIgnorePattern": "^_$"
         }
-      ]
+      ],
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "camelCase"
+        }
+      ],
+      "capitalized-comments": 0
     }
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "fs-extra": "^8.1.0",
+    "meow": "^5.0.0",
+    "clean-stack": "^2.1.0",
+    "knack-avro": "0.0.0",
+    "knack-consumer-client": "0.0.0",
+    "knack-producer-client": "0.0.0",
+    "knack-sr": "0.0.0"
   }
 }

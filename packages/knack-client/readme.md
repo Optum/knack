@@ -1,5 +1,5 @@
 <h2 align="center">
-  node-kafka-client
+  knack-client
 </h2>
 
 <p align="center">
@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i node-kafka-client
+$ npm i knack-client
 ```
 
