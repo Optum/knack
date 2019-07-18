@@ -22,8 +22,7 @@
     "test": "xo && nyc ava"
   },
   "files": [
-    "index.js",
-    "cli.js"
+    "index.js"
   ],
   "keywords": [
     "kafka"
@@ -50,7 +49,14 @@
         {
           "caughtErrorsIgnorePattern": "^_$"
         }
-      ]
+      ],
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "camelCase"
+        }
+      ],
+      "capitalized-comments": 0
     }
   }
 }

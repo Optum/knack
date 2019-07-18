@@ -50,7 +50,14 @@
         {
           "caughtErrorsIgnorePattern": "^_$"
         }
-      ]
+      ],
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "camelCase"
+        }
+      ],
+      "capitalized-comments": 0
     }
   }
 }

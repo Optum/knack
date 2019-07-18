@@ -1,7 +1,9 @@
 const knackConsumer = require('knack-consumer');
+const KnackSr = require('knack-sr');
 const {parseRecord} = require('./parseRecord');
 
-const NON_FLOW_MODE_MSG_NUM = 1;
+const {Console} = console;
+const defaultLogger = new Console({stdout: process.stdout, stderr: process.stderr});
 
 let consumer = {};
 
@@ -9,29 +11,64 @@ const defaultConsumerConfig = {
 	'client.id': 'my-kafka-client-v1',
 	'group.id': 'my-kafka-group-v1',
 	'metadata.broker.list': 'localhost:9092',
-	'enable.auto.commit': true,
 	'socket.keepalive.enable': true,
-	'auto.offset.reset': 'beginning'
+	'enable.auto.commit': true
 };
 
-let log = console;
+const defaultTopicConfig = {
+	'auto.offset.reset': 'earliest',
+	// eslint-disable-next-line camelcase
+	event_cb: () => {}
+};
+
+let log = defaultLogger;
+
+const resolveSchemas = async (sr, topic) => {
+	const schemas = {};
+
+	// try to get key schema
+	try {
+		const keySchema = await sr.getSchemaBySubject(`${topic}-key`);
+		schemas.key = keySchema.schema;
+	} catch (_) {
+		log.info(`no key schema found for topic ${topic}`);
+	}
+
+	// try to get value schema
+	try {
+		const valueSchema = await sr.getSchemaBySubject(`${topic}-value`);
+		schemas.value = valueSchema.schema;
+	} catch (_) {
+		log.info(`no value schema found for topic ${topic}`);
+	}
+
+	return schemas;
+};
 
 const connect = async config => {
-	const {logger, subscriptions, flowMode, consumerConfig} = config;
-
+	const {logger, subscriptions, flowMode, consumerConfig, topicConfig, schemaRegistryInfo} = config;
 	if (!Array.isArray(subscriptions)) {
 		throw new TypeError('subscriptions must be an array');
 	}
 
+	const topics = [];
 	const subscriptionMap = {};
 
-	subscriptions.map(s => {
-		subscriptionMap[s.topic] = s;
-		return s.topic;
-	});
+	const sr = new KnackSr(schemaRegistryInfo);
+
+	for (const subscription of subscriptions) {
+		topics.push(subscription.topic);
+		// eslint-disable-next-line no-await-in-loop
+		subscription.schemas = await resolveSchemas(sr, subscription.topic);
+		subscriptionMap[subscription.topic] = subscription;
+	}
 
 	if (!consumerConfig) {
 		config.consumerConfig = defaultConsumerConfig;
+	}
+
+	if (!topicConfig) {
+		config.topicConfig = defaultTopicConfig;
 	}
 
 	if (logger) {
@@ -40,27 +77,28 @@ const connect = async config => {
 
 	const onData = async record => {
 		try {
-			log.info('got a message');
-			// TODO: update parseRecord call param to adhere to the following model
-			// by use the record.topic to attempt to get the schema from knack-sr
-			// {keySchema, valueSchema, key, value}
-			const {key, value} = await parseRecord(record);
+			const {handler, schemas} = subscriptionMap[record.topic];
 
-			await subscriptionMap[record.topic].handler({
+			const {key, value} = await parseRecord({
+				key: record.key,
+				value: record.value,
+				keySchema: schemas.key,
+				valueSchema: schemas.value
+			});
+
+			await handler({
 				key,
 				value,
 				timestamp: record.timestamp,
 				topic: record.topic
 			});
-
-			if (!config.consumerConfig['enable.auto.commit']) {
-				// Commit offset after handler completes
-				consumer.commitMessage(record);
-			}
 		} catch (error) {
 			log.error(error);
 
-			// NOTE: impl error handling abstraction
+			// stop consuming on error
+			knackConsumer.disconnect();
+
+			// TODO: impl error handling abstraction
 			// that allows configurable behaivors.
 			// examples:
 			//  - allow for certain errors to cause a shutdown
@@ -68,14 +106,16 @@ const connect = async config => {
 			//  - allow these configurations to be async
 			//  - allow shutdown to exit without consuming another message
 		}
-
-		if (!flowMode) {
-			// Non-flowing mode
-			consumer.consume(NON_FLOW_MODE_MSG_NUM);
-		}
 	};
 
-	consumer = await knackConsumer.connect({logger, subscriptions, flowMode, consumerConfig, onData});
+	consumer = await knackConsumer.connect({
+		logger,
+		topics,
+		flowMode,
+		consumerConfig: config.consumerConfig,
+		topicConfig: config.topicConfig,
+		onData
+	});
 
 	return consumer;
 };
@@ -83,6 +123,9 @@ const connect = async config => {
 module.exports = {
 	getConsumer: () => {
 		return consumer;
+	},
+	disconnect: () => {
+		knackConsumer.disconnect();
 	},
 	connect
 };

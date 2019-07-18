@@ -1,5 +1,5 @@
 <h2 align="center">
-  node-kafka-producer
+  knack-producer
 </h2>
 
 <p align="center">
@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i node-kafka-producer
+$ npm i knack-producer
 ```
 

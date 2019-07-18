@@ -1,5 +1,5 @@
 <h2 align="center">
-  node-kafka-sr
+  knack-sr
 </h2>
 
 <p align="center">
@@ -15,5 +15,5 @@
 <b>first things first...</b>
 
 ```js
-$ npm i node-kafka-sr
+$ npm i knack-sr
 ```
