@@ -91,7 +91,7 @@ const buildHelpContent = () => {
 	helpContent += chalk.blueBright('--count    number of record to publish\n');
 	helpContent += chalk.whiteBright('Examples\n');
 	helpContent += chalk.blueBright('$ knack produce --topic test-client-topic-v1 --key /path/to/message-key.json --value /path/to/message-value.json\n');
-	helpContent += chalk.greenBright('1 messages sent to test-client-topic-v1\n');
+	helpContent += chalk.greenBright('1 message(s) sent to test-client-topic-v1\n');
 
 	// knack: consume
 	helpContent += chalk.whiteBright('\n\n');

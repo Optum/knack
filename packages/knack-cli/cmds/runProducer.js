@@ -39,7 +39,7 @@ const main = async (keyFilePath, valuefilePath, topic, count) => {
 	await KnackProducerClient.disconnectInstances();
 
 	return {
-		message: `${tasks.length} messages sent to ${topic}`
+		message: `${tasks.length} message(s) sent to ${topic}`
 	};
 };
 

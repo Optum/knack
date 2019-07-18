@@ -72,7 +72,7 @@ $ knack --help
   --count    number of record to publish
   Examples
   $ knack produce --topic test-client-topic-v1 --key /path/to/message-key.json --value /path/to/message-value.json
-  1 messages sent to test-client-topic-v1
+  1 message(s) sent to test-client-topic-v1
   
   
   Command
