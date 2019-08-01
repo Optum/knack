@@ -23,7 +23,7 @@ $ npm i @optum/knack-avro
     * data: `Object`  json object to encode 
     * schema: `Object or String`  schema to use when encoding the data
     * schemaId: `Number` schemaId of the schema from the schema registry
-- fromAvroBufferd: (schema, buffer)
+- fromAvroBuffer: (schema, buffer)
   + get json from avro buffer and schema
     * schema: `Object or String`  overrides all other options
     * buffer: `Buffer` avro encoded buffer
