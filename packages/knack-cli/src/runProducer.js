@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const KnackProducerClient = require('knack-producer-client');
+const KnackProducerClient = require('@optum/knack-producer-client');
 
 const tryParse = str => {
 	try {
@@ -15,14 +15,20 @@ const resolveContent = async filePath => {
 	}
 };
 
-const main = async (keyFilePath, valuefilePath, topic, count) => {
+const main = async (keyFilePath, valuefilePath, topic, count, producerConfigPath) => {
 	const key = await resolveContent(keyFilePath);
 	const value = await resolveContent(valuefilePath);
 
-	// TODO: make producer and topic config configurable
-	await KnackProducerClient.connectInstance();
+	let producer;
 
-	const producer = KnackProducerClient.instance();
+	if (producerConfigPath) {
+		const producerConfig = await resolveContent(producerConfigPath);
+		await KnackProducerClient.connectInstance(producerConfig);
+		producer = KnackProducerClient.instance(producerConfig);
+	} else {
+		await KnackProducerClient.connectInstance();
+		producer = KnackProducerClient.instance();
+	}
 
 	const tasks = [];
 

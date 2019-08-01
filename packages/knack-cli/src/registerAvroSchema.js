@@ -1,6 +1,6 @@
 const assert = require('assert').strict;
 const fs = require('fs-extra');
-const KnackSr = require('knack-sr');
+const KnackSr = require('@optum/knack-sr');
 
 const main = async (subject, avscPath) => {
 	const sr = new KnackSr();

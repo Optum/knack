@@ -1,4 +1,5 @@
-const knackConsumerClient = require('knack-consumer-client');
+const {readJson} = require('fs-extra');
+const knackConsumerClient = require('@optum/knack-consumer-client');
 
 // TOOD: make consumer and topic config configurable
 const defaultConsumerConfig = {
@@ -16,7 +17,25 @@ const defaultTopicConfig = {
 	event_cb: () => {}
 };
 
-const main = async topic => {
+const getConfigs = async ({consumerConfigPath, topicConfigPath}) => {
+	let consumerConfig = defaultConsumerConfig;
+	let topicConfig = defaultTopicConfig;
+
+	if (consumerConfigPath) {
+		consumerConfig = await readJson(consumerConfigPath);
+	}
+
+	if (topicConfigPath) {
+		topicConfig = await readJson(topicConfigPath);
+	}
+
+	return {
+		consumerConfig,
+		topicConfig
+	};
+};
+
+const main = async ({topic, consumerConfigPath, topicConfigPath}) => {
 	try {
 		const handler = async ({key, value, timestamp, topic}) => {
 			console.log('key', key);
@@ -30,11 +49,16 @@ const main = async topic => {
 			handler
 		};
 
+		const {consumerConfig, topicConfig} = await getConfigs({
+			consumerConfigPath,
+			topicConfigPath
+		});
+
 		await knackConsumerClient.connect({
 			subscriptions: [subscription],
 			flowMode: true,
-			consumerConfig: defaultConsumerConfig,
-			topicConfig: defaultTopicConfig
+			consumerConfig,
+			topicConfig
 		});
 
 		process.on('SIGINT', () => {

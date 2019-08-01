@@ -44,14 +44,6 @@ const resolveType = schema => {
 	return type;
 };
 
-/**
- * Encode a value
- * @param {String|Object} val - a value to be encode
- * @param {String|Object} schema - avro schema
- * @param {Number} schemaId - id of the schema
- * @param {Number} [optLength] - lenght of buffer to allocate
- * @returns {Buffer} Avro encoded buffer
- */
 const toAvroBuffer = (val, schema, schemaId, optLength) => {
 	const length = optLength || 1024;
 	const buf = Buffer.alloc(length);
@@ -70,12 +62,6 @@ const toAvroBuffer = (val, schema, schemaId, optLength) => {
 	return buf.slice(0, pos);
 };
 
-/**
- * Decode a buffer
- * @param {String|Object} schema - avro schema
- * @param {Buffer} encodedBuffer - avro encoded buffer
- * @returns {Object} with a value and schemaId
- */
 const fromAvroBuffer = (schema, encodedBuffer) => {
 	if (encodedBuffer[0] !== MAGIC_BYTE) {
 		throw new TypeError('message not serialized with magic byte');

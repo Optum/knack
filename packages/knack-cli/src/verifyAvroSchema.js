@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const {fromAvroBuffer, toAvroBuffer} = require('knack-avro');
+const {fromAvroBuffer, toAvroBuffer} = require('@optum/knack-avro');
 
 const main = async (avscPath, dataPath, show = false) => {
 	const avscSchemaJson = await fs.readJson(avscPath);

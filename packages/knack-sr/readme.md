@@ -14,6 +14,6 @@
 
 <b>first things first...</b>
 
-```js
-$ npm i knack-sr
+```shell
+$ npm i @optum/knack-sr
 ```

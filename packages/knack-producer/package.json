@@ -1,5 +1,5 @@
 {
-  "name": "knack-producer",
+  "name": "@optum/knack-producer",
   "version": "0.0.0",
   "description": "A module for publishing to Apache Kafka.",
   "license": "Apache-2.0",
@@ -23,7 +23,8 @@
   },
   "files": [
     "index.js",
-    "cli.js"
+    "knackProducer.js",
+    "knackHighLevelProducer.js"
   ],
   "keywords": [
     "kafka"
@@ -35,6 +36,8 @@
   "devDependencies": {
     "ava": "^1.4.1",
     "nyc": "^14.1.0",
+    "proxyquire": "^2.1.1",
+    "sinon": "^7.3.2",
     "xo": "^0.24.0"
   },
   "nyc": {
@@ -42,6 +45,26 @@
       "lcov",
       "text"
     ]
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "helpers": [
+      "test/utils/**/*.js"
+    ],
+    "sources": [
+      "index.js",
+      "knackProducer.js",
+      "knackHighLevelProducer.js"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "environmentVariables": {},
+    "tap": false,
+    "verbose": true,
+    "compileEnhancements": false
   },
   "xo": {
     "rules": {

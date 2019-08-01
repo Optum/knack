@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "name": "messageInfo",
+  "namespace": "io.knack.schemas.avro",
+  "fields": [
+    {
+      "name": "content",
+      "type": "string"
+    },
+    {
+      "name": "channel",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}

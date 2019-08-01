@@ -1,14 +1,18 @@
 const got = require('got');
 
 const defaultOptions = {
-	protocol: 'http',
+	scheme: 'http',
 	domain: 'localhost:8081'
 };
 
 class SchemaRegistry {
 	constructor(options = defaultOptions) {
-		const {protocol, domain} = options;
-		this._baseUri = `${protocol}://${domain}`;
+		const {scheme, domain, url} = options;
+		if (url) {
+			this._baseUri = url;
+		} else {
+			this._baseUri = `${scheme}://${domain}`;
+		}
 	}
 
 	get baseUri() {
