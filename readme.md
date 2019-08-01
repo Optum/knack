@@ -24,11 +24,11 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [<b>`knack-consumer`</b>](packages/knack-consumer) | 1.0.0 |
 |A module for consuming messages from Apache Kafka.|
 | [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | 1.0.0 |
-|A module for consuming records with Apache Kafka.|
+|A module for consuming records from Apache Kafka with integrated avro support.|
 | [<b>`knack-producer`</b>](packages/knack-producer) | 1.0.0 |
 |A module for publishing to Apache Kafka.|
 | [<b>`knack-producer-client`</b>](packages/knack-producer-client) | 1.0.0 |
-|A module for producing Apache Kafka records.|
+|A module for publishing records to Apache Kafka with integrated avro support.|
 | [<b>`knack-sr`</b>](packages/knack-sr) | 1.0.0 |
 |A module for interacting with the Kafka Schema Registry.|
 | [<b>`knack-cli`</b>](packages/knack-cli) | 1.0.0 |

@@ -6,8 +6,10 @@ const {toAvroBuffer} = require('@optum/knack-avro');
 const cache = new QuickLRU({maxSize: 1000});
 
 const defaultOptions = {
-	scheme: 'http',
-	domain: 'localhost:8081',
+	srOptions: {
+		scheme: 'http',
+		domain: 'localhost:8081'
+	},
 	producerConfig: {
 		'metadata.broker.list': ['localhost:9092']
 	}
@@ -27,7 +29,7 @@ const resolveProducer = (options = defaultOptions) => {
 class KnackProducerClient {
 	constructor(options = defaultOptions) {
 		this._options = options;
-		const {scheme, domain, useHighLevelProducer} = options;
+		const {srOptions, useHighLevelProducer} = options;
 
 		if (useHighLevelProducer) {
 			const {KnackHighLevelProducer} = KnackProducers;
@@ -37,12 +39,14 @@ class KnackProducerClient {
 			this._producer = new KnackProducer(options);
 		}
 
-		this._sr = new SchemaRegistry({scheme, domain});
+		this._sr = new SchemaRegistry(srOptions);
+		this.knackConnected = false;
 	}
 
 	static async connectInstance(options = defaultOptions) {
 		const producer = resolveProducer(options);
 		const connection = await producer.connect();
+		this.knackConnected = true;
 		return connection;
 	}
 
@@ -55,6 +59,16 @@ class KnackProducerClient {
 		}
 
 		return Promise.all(tasks);
+	}
+
+	static async resolveInstance(options = defaultOptions) {
+		const producer = resolveProducer(options);
+		if (!producer.knackConnected) {
+			await producer.connect();
+			producer.knackConnected = true;
+		}
+
+		return producer;
 	}
 
 	static instance(options = defaultOptions) {

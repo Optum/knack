@@ -22,7 +22,7 @@ $ npm i -g @optum/knack-cli
 
 ```shell
 $ knack --help
-  A cli for working with Apache Kafka development.
+ A cli for working with Apache Kafka development.
 
   -------------------------------------
    _   __ _   _   ___   _____  _   __

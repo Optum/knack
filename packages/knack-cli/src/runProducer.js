@@ -23,11 +23,9 @@ const main = async (keyFilePath, valuefilePath, topic, count, producerConfigPath
 
 	if (producerConfigPath) {
 		const producerConfig = await resolveContent(producerConfigPath);
-		await KnackProducerClient.connectInstance(producerConfig);
-		producer = KnackProducerClient.instance(producerConfig);
+		producer = await KnackProducerClient.resolveInstance({producerConfig});
 	} else {
-		await KnackProducerClient.connectInstance();
-		producer = KnackProducerClient.instance();
+		producer = await KnackProducerClient.resolveInstance();
 	}
 
 	const tasks = [];

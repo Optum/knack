@@ -81,7 +81,7 @@ const resolveSchemas = async (sr, topic) => {
 };
 
 const connect = async config => {
-	const {logger, subscriptions, flowMode, consumerConfig, topicConfig, schemaRegistryInfo} = config;
+	const {logger, subscriptions, flowMode, consumerConfig, topicConfig, srOptions} = config;
 	if (!Array.isArray(subscriptions)) {
 		throw new TypeError('subscriptions must be an array');
 	}
@@ -93,7 +93,7 @@ const connect = async config => {
 	const topics = [];
 	const subscriptionMap = {};
 
-	const sr = new KnackSr(schemaRegistryInfo);
+	const sr = new KnackSr(srOptions);
 
 	for (const subscription of subscriptions) {
 		topics.push(subscription.topic);
