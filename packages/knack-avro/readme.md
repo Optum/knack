@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i knack-avro
+$ npm i @optum/knack-avro
 ```
 

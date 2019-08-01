@@ -1,8 +1,28 @@
 {
-  "name": "knack-packages",
+  "name": "@optum/knack-packages",
   "private": true,
+  "scripts": {
+    "test": "node ./scripts/test.js",
+    "quick-test": "xo && ava"
+  },
   "devDependencies": {
-    "lerna": "^3.14.1"
+    "ava": "^2.2.0",
+    "execa": "^2.0.3",
+    "husky": "^3.0.1",
+    "lerna": "^3.14.1",
+    "xo": "^0.24.0"
+  },
+  "ava": {
+    "files": [
+      "packages/knack-*/test/**/*.test.js"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "environmentVariables": {},
+    "tap": false,
+    "verbose": true,
+    "compileEnhancements": false
   },
   "xo": {
     "rules": {

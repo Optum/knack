@@ -1,4 +1,4 @@
-const {fromAvroBuffer} = require('knack-avro');
+const {fromAvroBuffer} = require('@optum/knack-avro');
 
 const tryParse = str => {
 	try {

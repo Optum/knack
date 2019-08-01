@@ -1,35 +1,43 @@
 const QuickLRU = require('quick-lru');
-const KafkaProducer = require('knack-producer');
-const SchemaRegistry = require('knack-sr');
-const {toAvroBuffer} = require('knack-avro');
+const KnackProducers = require('@optum/knack-producer');
+const SchemaRegistry = require('@optum/knack-sr');
+const {toAvroBuffer} = require('@optum/knack-avro');
 
 const cache = new QuickLRU({maxSize: 1000});
 
 const defaultOptions = {
-	protocol: 'http',
+	scheme: 'http',
 	domain: 'localhost:8081',
-	config: {
+	producerConfig: {
 		'metadata.broker.list': ['localhost:9092']
 	}
 };
 
 const resolveProducer = (options = defaultOptions) => {
-	const cacheKey = `p-${options.config['metadata.broker.list']}`;
+	const cacheKey = `p-${options.producerConfig['metadata.broker.list']}`;
 	let producer = cache.get(cacheKey);
 	if (!producer) {
-		producer = new KafkaProducerClient(options);
+		producer = new KnackProducerClient(options);
 		cache.set(cacheKey, producer);
 	}
 
 	return producer;
 };
 
-class KafkaProducerClient {
+class KnackProducerClient {
 	constructor(options = defaultOptions) {
 		this._options = options;
-		this._producer = new KafkaProducer(this.options);
-		const {protocol, domain} = this.options;
-		this._sr = new SchemaRegistry({protocol, domain});
+		const {scheme, domain, useHighLevelProducer} = options;
+
+		if (useHighLevelProducer) {
+			const {KnackHighLevelProducer} = KnackProducers;
+			this._producer = new KnackHighLevelProducer(options);
+		} else {
+			const {KnackProducer} = KnackProducers;
+			this._producer = new KnackProducer(options);
+		}
+
+		this._sr = new SchemaRegistry({scheme, domain});
 	}
 
 	static async connectInstance(options = defaultOptions) {
@@ -71,6 +79,8 @@ class KafkaProducerClient {
 
 		let schema = cache.get(cacheKey);
 		if (!schema) {
+			// NOTE: add option to disable throwing an error when 404 returns
+			// from sr ... this way it will support publishing json, strings, etc.
 			schema = await this.schemaRegistry.getSchemaBySubject(subject);
 			cache.set(cacheKey, schema);
 		}
@@ -100,4 +110,4 @@ class KafkaProducerClient {
 	}
 }
 
-module.exports = KafkaProducerClient;
+module.exports = KnackProducerClient;

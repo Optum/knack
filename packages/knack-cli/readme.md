@@ -15,7 +15,7 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i -g knack-cli
+$ npm i -g @optum/knack-cli
 ```
 
 ### Help Menu
@@ -46,7 +46,6 @@ $ knack --help
   
   Examples
   $ knack verify-avro-schema --avsc /path/to/schema.avsc --data /path/to/data.json
-  validated data with a resulting buffer length of 18
   
   
   Command
@@ -59,7 +58,6 @@ $ knack --help
   
   Examples
   $ knack register-avro-schema --avsc /path/to/schema.avsc --topic test-client-topic-v1 --type value
-  test-client-topic-v1-value registered
   
   
   Command
@@ -72,7 +70,6 @@ $ knack --help
   --count    number of record to publish
   Examples
   $ knack produce --topic test-client-topic-v1 --key /path/to/message-key.json --value /path/to/message-value.json
-  1 message(s) sent to test-client-topic-v1
   
   
   Command
@@ -82,44 +79,13 @@ $ knack --help
   --topic    consume records from this topic
   Examples
   $ knack consume --topic test-client-topic-v1
-  consumer connected to test-client-topic-v1
-```
-
-### Options
-
-```json
-{
-  "avsc": {
-    "type": 'string',
-    "alias": 'a'
-  },
-  "data": {
-    "type": 'string',
-    "alias": 'd'
-  },
-  "topic": {
-    "type": 'string',
-    "alias": 't'
-  },
-  "type": {
-    "type": 'string',
-    "alias": 'ty'
-  },
-  "key": {
-    "type": 'string',
-    "alias": 'k'
-  },
-  "value": {
-    "type": 'string',
-    "alias": 'v'
-  },
-  "count": {
-    "type": 'number',
-    "alias": 'c'
-  },
-  "show": {
-    "type": 'boolean',
-    "alias": 's'
-  }
-}
+  
+  
+  Command
+  check-kafka    check kafka status and get metadata
+  
+  Options
+  --brokers    comma separated list of brokers
+  Examples
+  $ knack check-kafka --brokers localhost:9092
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "knack-avro",
+  "name": "@optum/knack-avro",
   "version": "0.0.0",
   "description": "A module for encoding and decoding avro with Kafka.",
   "license": "Apache-2.0",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "ava": "^1.4.1",
+    "fs-extra": "^8.1.0",
     "nyc": "^14.1.0",
     "xo": "^0.24.0"
   },
@@ -42,6 +43,10 @@
     ]
   },
   "xo": {
+    "envs": [
+      "node",
+      "ava"
+    ],
     "rules": {
       "unicorn/catch-error-name": [
         "error",

@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i knack-producer
+$ npm i @optum/knack-producer
 ```
 

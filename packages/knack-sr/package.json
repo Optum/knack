@@ -1,5 +1,5 @@
 {
-  "name": "knack-sr",
+  "name": "@optum/knack-sr",
   "version": "0.0.0",
   "description": "A module for interacting with the Kafka Schema Registry.",
   "license": "Apache-2.0",
@@ -32,7 +32,10 @@
   },
   "devDependencies": {
     "ava": "^1.4.1",
+    "nock": "^10.0.6",
     "nyc": "^14.1.0",
+    "proxyquire": "^2.1.1",
+    "sinon": "^7.3.2",
     "xo": "^0.24.0"
   },
   "nyc": {
@@ -40,6 +43,21 @@
       "lcov",
       "text"
     ]
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "sources": [
+      "index.js"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "environmentVariables": {},
+    "tap": false,
+    "verbose": true,
+    "compileEnhancements": false
   },
   "xo": {
     "rules": {

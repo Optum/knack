@@ -1,7 +1,10 @@
-const knackConsumer = require('knack-consumer');
-const KnackSr = require('knack-sr');
+const fs = require('fs');
+const {promisify} = require('util');
+const knackConsumer = require('@optum/knack-consumer');
+const KnackSr = require('@optum/knack-sr');
 const {parseRecord} = require('./parseRecord');
 
+const readFileAsync = promisify(fs.readFile);
 const {Console} = console;
 const defaultLogger = new Console({stdout: process.stdout, stderr: process.stderr});
 
@@ -19,6 +22,38 @@ const defaultTopicConfig = {
 	'auto.offset.reset': 'earliest',
 	// eslint-disable-next-line camelcase
 	event_cb: () => {}
+};
+
+const readFileAsJson = async filePath => {
+	try {
+		// NOTE: could also load the path as a module to support functions like event_cb
+		const configStr = await readFileAsync(filePath);
+		return JSON.parse(configStr);
+	} catch (_) {}
+};
+
+const getDefaultConfigs = async () => {
+	let consumerConfig = defaultConsumerConfig;
+	let topicConfig = defaultTopicConfig;
+
+	if (process.env.KNACK_CONSUMER_CONFIG_PATH) {
+		const configJson = await readFileAsJson(process.env.KNACK_CONSUMER_CONFIG_PATH);
+		if (configJson) {
+			consumerConfig = configJson;
+		}
+	}
+
+	if (process.env.KNACK_CONSUMER_TOPIC_CONFIG_PATH) {
+		const configJson = await readFileAsJson(process.env.KNACK_CONSUMER_TOPIC_CONFIG_PATH);
+		if (configJson) {
+			topicConfig = configJson;
+		}
+	}
+
+	return {
+		consumer: consumerConfig,
+		topic: topicConfig
+	};
 };
 
 let log = defaultLogger;
@@ -51,6 +86,10 @@ const connect = async config => {
 		throw new TypeError('subscriptions must be an array');
 	}
 
+	if (logger) {
+		log = logger;
+	}
+
 	const topics = [];
 	const subscriptionMap = {};
 
@@ -63,16 +102,22 @@ const connect = async config => {
 		subscriptionMap[subscription.topic] = subscription;
 	}
 
+	let defaultConfigs;
+
 	if (!consumerConfig) {
-		config.consumerConfig = defaultConsumerConfig;
+		if (!defaultConfigs) {
+			defaultConfigs = await getDefaultConfigs();
+		}
+
+		config.consumerConfig = defaultConfigs.consumer;
 	}
 
 	if (!topicConfig) {
-		config.topicConfig = defaultTopicConfig;
-	}
+		if (!defaultConfigs) {
+			defaultConfigs = await getDefaultConfigs();
+		}
 
-	if (logger) {
-		log = logger;
+		config.topicConfig = defaultConfigs.topic;
 	}
 
 	const onData = async record => {
@@ -96,7 +141,7 @@ const connect = async config => {
 			log.error(error);
 
 			// stop consuming on error
-			knackConsumer.disconnect();
+			await knackConsumer.disconnect();
 
 			// TODO: impl error handling abstraction
 			// that allows configurable behaivors.
@@ -125,7 +170,8 @@ module.exports = {
 		return consumer;
 	},
 	disconnect: () => {
-		knackConsumer.disconnect();
+		return knackConsumer.disconnect();
 	},
-	connect
+	connect,
+	getDefaultConfigs
 };

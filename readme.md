@@ -21,8 +21,6 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 |---|---|
 | [<b>`knack-avro`</b>](packages/knack-avro) | 1.0.0 |
 |A module for encoding and decoding avro with Kafka.|
-| [<b>`knack-client`</b>](packages/knack-client) |  1.0.0 |
-|A module for interacting with Apache Kafka.|
 | [<b>`knack-consumer`</b>](packages/knack-consumer) | 1.0.0 |
 |A module for consuming messages from Apache Kafka.|
 | [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | 1.0.0 |
@@ -45,9 +43,17 @@ $ lerna init
 $ lerna bootstrap
 ```
 
+run tests
+
+```shell
+$ npm test --silent
+# or
+$ npm run quick-test --silent
+```
+
 ## Examples
 
-Initial working code examples can be found in the [<b>`knack-cli/cmds`</b>](packages/knack-cli) folder.
+Initial working code examples can be found in the [<b>`knack-cli/src`</b>](packages/knack-cli/src) folder.
 
 ## Contributing to the Project
 

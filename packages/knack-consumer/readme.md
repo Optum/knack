@@ -15,6 +15,6 @@
 <b>first things first...</b>
 
 ```shell
-$ npm i knack-consumer
+$ npm i @optum/knack-consumer
 ```
 
