@@ -31,9 +31,9 @@ class KnackHighLevelProducer extends Kafka.HighLevelProducer {
 		return disconnection;
 	}
 
-	getMetadata() {
+	readMetadata(options) {
 		return new Promise((resolve, reject) => {
-			super.getMetadata({
+			super.getMetadata(options || {
 				timeout: 10000
 			}, (error, metadata) => {
 				if (error) {
@@ -41,6 +41,18 @@ class KnackHighLevelProducer extends Kafka.HighLevelProducer {
 				}
 
 				return resolve(metadata);
+			});
+		});
+	}
+
+	produceAsync(topic, partition, value, key) {
+		return new Promise((resolve, reject) => {
+			this.produce(topic, partition, value, key, Date.now(), (error, offset) => {
+				if (error) {
+					return reject(error);
+				}
+
+				return resolve(offset);
 			});
 		});
 	}

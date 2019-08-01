@@ -18,3 +18,46 @@
 $ npm i @optum/knack-producer
 ```
 
+<b>options</b>
+
+- producerConfig: `[Object]` librd producer config
+
+## Examples
+
+```js
+const {
+    KnackProducer, 
+    KnackHighLevelProducer
+} = require('@optum/knack-producer');
+
+const options = {
+    producerConfig: {
+        'metadata.broker.list': ['localhost:9092']
+    }
+};
+
+// example data
+const topic = 'knack-test-topic-v1';
+const key = Buffer.from('key-001');
+const value = Buffer.from('hello from knack producer');
+
+// use standard producer
+const knackProducer = new KnackProducer(options)
+await knackProducer.connect();
+
+knackProducer.produce(topic, null, value, key, Date.now());
+
+// use high level producer
+const knackHighLevelProducer = new KnackHighLevelProducer(options)
+await knackHighLevelProducer.connect();
+
+producer.produceAsync(topic, null, value, key);
+
+knackHighLevelProducer
+    .produce(topic, null, value, key, Date.now(), (err, offset) => {
+  // The offset if our acknowledgement level allows us to receive delivery offsets
+  console.log(offset);
+});
+```
+
+
