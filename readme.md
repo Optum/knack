@@ -46,9 +46,11 @@ $ lerna bootstrap
 run tests
 
 ```shell
-$ npm test --silent
+$ lerna run test
 # or
-$ npm run quick-test --silent
+$ npm run lint-test --silent
+# or in each package dir
+$ npm run test
 ```
 
 ## Examples
