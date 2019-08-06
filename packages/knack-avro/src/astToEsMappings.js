@@ -39,11 +39,11 @@ const buildMappings = node => {
 	return mapField({...node, props});
 };
 
-const main = ({ast}) => {
-	const mappings = buildMappings(ast);
+const main = ast => {
+	const mappings = buildMappings(ast.tree);
 	return {
 		mappings: {
-			properties: mappings[ast.name].properties
+			properties: mappings[ast.tree.name].properties
 		}
 	};
 };

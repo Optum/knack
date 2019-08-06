@@ -166,7 +166,7 @@ class Ast {
 	}
 
 	build() {
-		this.ast = this.traverseTypes(this.avscType);
+		this.tree = this.traverseTypes(this.avscType);
 	}
 
 	getAstType(name) {
