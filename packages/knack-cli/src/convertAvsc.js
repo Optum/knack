@@ -1,11 +1,14 @@
 const fsExtra = require('fs-extra');
-const createStream = require('p-pipe');
+const {streams} = require('@optum/knack-avro');
 
-const {avscToAst, astToEsMapping} = require('./converters');
+const {avscToEsMappings, avscToJsonSchema} = streams;
 
 const formats = {
 	es: {
-		converter: createStream(avscToAst, astToEsMapping)
+		converter: avscToEsMappings
+	},
+	json: {
+		converter: avscToJsonSchema
 	}
 };
 
@@ -18,7 +21,7 @@ const main = async ({avsc: avscPath, format, output: outputPath}) => {
 
 	const avroSchema = await fsExtra.readJson(avscPath);
 
-	const content = await formats[format].converter(avroSchema);
+	const content = formats[format].converter(avroSchema);
 
 	await fsExtra.outputJson(outputPath, content);
 

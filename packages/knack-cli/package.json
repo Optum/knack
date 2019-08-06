@@ -64,10 +64,14 @@
     "@optum/knack-producer": "^0.0.0",
     "@optum/knack-producer-client": "0.0.0",
     "@optum/knack-sr": "0.0.0",
+    "avsc": "^5.4.12",
     "chalk": "^2.4.2",
     "clean-stack": "^2.1.0",
     "fs-extra": "^8.1.0",
+    "is-object-empty": "^2.0.1",
     "meow": "^5.0.0",
-    "p-pipe": "^3.0.0"
+    "ora": "^3.4.0",
+    "p-pipe": "^3.0.0",
+    "ramda": "^0.26.1"
   }
 }

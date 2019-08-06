@@ -171,14 +171,12 @@ const executeCmd = async cli => {
 };
 
 const showError = (message, error) => {
-	console.log(chalk.red(message));
-	if (error) {
-		console.log(chalk.redBright(error.stack ? cleanStack(error.stack) : error));
-	}
+	const errorText = chalk.redBright(error.stack ? cleanStack(error.stack) : error);
+	return `${chalk.red(message)}\n${errorText}`;
 };
 
 const showResult = ({message} = {}) => {
-	console.log(chalk.greenBright(message || 'done'));
+	return chalk.greenBright(message || 'done');
 };
 
 module.exports = {
@@ -186,5 +184,11 @@ module.exports = {
 	meowOptions,
 	executeCmd,
 	showError,
-	showResult
+	showResult,
+	registerAvroSchema,
+	runConsumer,
+	runProducer,
+	verifyAvroSchema,
+	checkKafka,
+	convertAvsc
 };
