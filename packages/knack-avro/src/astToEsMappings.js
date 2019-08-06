@@ -16,43 +16,54 @@ const convertFromAstType = astType => {
 	return astType;
 };
 
-const parseProps = ({avroItemTypeName, itemTypeName, props}, ast) => {
+const parseProps = ({avroItemTypeName, name, props}, ast, rootName, parents) => {
 	const p = getIfNotEmpty(props);
 
-	if (!p && avroItemTypeName === 'record') {
-		const fieldTypeRef = ast.getAstType(itemTypeName);
-		const {properties} = buildMappings(fieldTypeRef, ast);
+	if (!p && avroItemTypeName === 'record' && (parents.has(name) === false)) {
+		const fieldTypeRef = ast.getAstType(name);
+		const {properties} = buildMappings(fieldTypeRef, ast, rootName, parents);
 		return properties;
 	}
 
 	return p;
 };
 
-const mapField = (field, ast) => {
+const mapField = (field, ast, rootName, parents) => {
 	const {name, typeName, avroTypeName, avroItemTypeName, itemTypeName, props} = field;
 	const fieldWrapper = {};
 	fieldWrapper[name] = {
 		type: convertFromAstType(typeName || avroTypeName),
-		properties: parseProps({avroItemTypeName, itemTypeName, props}, ast)
+		properties: parseProps({avroItemTypeName, name, itemTypeName, props}, ast, rootName, parents)
 	};
 	return fieldWrapper;
 };
 
-const buildMappings = (node, ast) => {
-	const {fields} = node;
+const buildMappings = (node, ast, rootName, parents) => {
+	const {fields, name} = node;
 	let props = {};
+
+	if (rootName === name) {
+		parents.clear();
+	}
+
+	parents.add(name);
 
 	if (Array.isArray(fields)) {
 		for (const field of fields) {
-			props = {...props, ...buildMappings(field, ast)};
+			if (field.avroItemTypeName === 'record') {
+				parents.add(field.name);
+				props = {...props, ...buildMappings(field, ast, rootName, parents)};
+			} else {
+				props = {...props, ...buildMappings(field, ast, rootName, parents)};
+			}
 		}
 	}
 
-	return mapField({...node, props}, ast);
+	return mapField({...node, props}, ast, rootName, parents);
 };
 
 const main = ast => {
-	const mappings = buildMappings(ast.tree);
+	const mappings = buildMappings(ast.tree, ast, ast.tree.name, new Set());
 	return {
 		mappings: {
 			properties: mappings[ast.tree.name].properties

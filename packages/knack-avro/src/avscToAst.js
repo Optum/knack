@@ -63,7 +63,7 @@ class Ast {
 	}
 
 	toAst(avscType) {
-		const {name, typeName, branchName, avroTypeName, parsedFields, type, types, namespace} = avscType;
+		const {name, typeName, branchName, avroTypeName, parsedFields, type, itemsType, types, namespace} = avscType;
 		const isUnion = avroTypeName === AVRO_TYPE_UNION;
 		let astTypeName = typeName;
 		let astItemType;
@@ -76,7 +76,12 @@ class Ast {
 		}
 
 		if (astTypeName === AVRO_TYPE_ARRAY) {
-			astAvscTypeRef = this.getLast(types).itemsType;
+			if (isUnion) {
+				astAvscTypeRef = this.getLast(types).itemsType;
+			} else {
+				astAvscTypeRef = itemsType;
+			}
+
 			astItemType = astAvscTypeRef.name;
 			astItemAvroType = astAvscTypeRef.typeName;
 		} else if (astTypeName === AVRO_TYPE_RECORD) {
