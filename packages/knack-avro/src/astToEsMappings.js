@@ -16,27 +16,39 @@ const convertFromAstType = astType => {
 	return astType;
 };
 
-const mapField = field => {
-	const {name, typeName, avroTypeName, props} = field;
+const parseProps = ({avroItemTypeName, itemTypeName, props}, ast) => {
+	const p = getIfNotEmpty(props);
+
+	if (!p && avroItemTypeName === 'record') {
+		const fieldTypeRef = ast.getAstType(itemTypeName);
+		const {properties} = buildMappings(fieldTypeRef, ast);
+		return properties;
+	}
+
+	return p;
+};
+
+const mapField = (field, ast) => {
+	const {name, typeName, avroTypeName, avroItemTypeName, itemTypeName, props} = field;
 	const fieldWrapper = {};
 	fieldWrapper[name] = {
 		type: convertFromAstType(typeName || avroTypeName),
-		properties: getIfNotEmpty(props)
+		properties: parseProps({avroItemTypeName, itemTypeName, props}, ast)
 	};
 	return fieldWrapper;
 };
 
-const buildMappings = node => {
+const buildMappings = (node, ast) => {
 	const {fields} = node;
 	let props = {};
 
 	if (Array.isArray(fields)) {
 		for (const field of fields) {
-			props = {...props, ...buildMappings(field)};
+			props = {...props, ...buildMappings(field, ast)};
 		}
 	}
 
-	return mapField({...node, props});
+	return mapField({...node, props}, ast);
 };
 
 const main = ast => {
