@@ -63,12 +63,13 @@ class Ast {
 	}
 
 	toAst(avscType) {
-		const {name, typeName, branchName, avroTypeName, parsedFields, types, namespace} = avscType;
+		const {name, typeName, branchName, avroTypeName, parsedFields, type, types, namespace} = avscType;
 		const isUnion = avroTypeName === AVRO_TYPE_UNION;
 		let astTypeName = typeName;
 		let astItemType;
 		let astItemAvroType;
 		let astAvscTypeRef;
+		let astRefName;
 
 		if (isUnion) {
 			astTypeName = this.getLast(types).typeName || typeName;
@@ -79,18 +80,25 @@ class Ast {
 			astItemType = astAvscTypeRef.name;
 			astItemAvroType = astAvscTypeRef.typeName;
 		} else if (astTypeName === AVRO_TYPE_RECORD) {
-			astAvscTypeRef = this.getLast(types);
+			if (isUnion) {
+				astAvscTypeRef = this.getLast(types);
+			} else {
+				astAvscTypeRef = type;
+			}
+
 			astItemType = astAvscTypeRef.name;
 			astItemAvroType = astAvscTypeRef.typeName;
+			astRefName = astItemType;
 		}
 
 		const ast = {
 			name,
-			typeName: astTypeName,
-			itemTypeName: astItemType,
 			branchName,
 			avroTypeName,
+			astRefName,
 			namespace,
+			typeName: astTypeName,
+			itemTypeName: astItemType,
 			avroItemTypeName: astItemAvroType,
 			// assumes union is always used to default something optional
 			required: !isUnion,
