@@ -31,6 +31,9 @@ jobs:
     steps:
       - store_artifacts:
           path: coverage
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
       - codecov/upload:
           file: coverage/lcov.info
       - persist_to_workspace:
