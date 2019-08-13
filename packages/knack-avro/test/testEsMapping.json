@@ -1,0 +1,12 @@
+{
+  "mappings": {
+    "properties": {
+      "content": {
+        "type": "keyword"
+      },
+      "channel": {
+        "type": "keyword"
+      }
+    }
+  }
+}

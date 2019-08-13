@@ -1,5 +1,6 @@
 const {
 	astToEsMappings,
+	astToJsonSchema,
 	avscToAst,
 	encodeDecode,
 	streams
@@ -13,6 +14,7 @@ const {
 
 module.exports = {
 	astToEsMappings,
+	astToJsonSchema,
 	avscToAst,
 	toAvroBuffer,
 	fromAvroBuffer,
