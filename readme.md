@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg"></a>
+  <a href="https://circleci.com/gh/Optum/knack"><img src="https://circleci.com/gh/Optum/knack.svg?style=svg"></a>&nbsp;<a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg"></a>
   <a href="https://lerna.js.org/"><img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"></a>
 </p>
 
