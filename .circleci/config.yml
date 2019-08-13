@@ -26,7 +26,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
-  codecov:
+  upload-codecov:
     <<: *defaults
     steps:
       - store_artifacts:
@@ -39,7 +39,7 @@ workflows:
   build-test-codecov:
     jobs:
       - build
-      - codecov:
+      - upload-codecov:
           requires:
             - build
           filters:
