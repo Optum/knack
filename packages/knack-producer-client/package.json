@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-producer-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A module for producing records with Apache Kafka.",
   "license": "Apache-2.0",
   "licenses": [
@@ -28,9 +28,9 @@
     "kafka"
   ],
   "dependencies": {
-    "@optum/knack-avro": "0.0.0",
-    "@optum/knack-producer": "0.0.0",
-    "@optum/knack-sr": "0.0.0",
+    "@optum/knack-avro": "^1.0.0",
+    "@optum/knack-producer": "^1.0.0",
+    "@optum/knack-sr": "^1.0.0",
     "quick-lru": "^4.0.0"
   },
   "devDependencies": {
