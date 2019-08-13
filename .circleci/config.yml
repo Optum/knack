@@ -30,7 +30,9 @@ jobs:
           path: coverage
       - persist_to_workspace:
           root: ~/repo
-          paths: coverage
+          paths: 
+            - coverage
+            - packages
   upload-codecov:
     <<: *defaults
     steps:
