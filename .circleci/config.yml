@@ -31,7 +31,7 @@ jobs:
       - persist_to_workspace:
           root: coverage
           paths: 
-            - coverage/lcov.info
+            - lcov.info
   upload-codecov:
     <<: *defaults
     steps:
