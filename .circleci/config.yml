@@ -23,7 +23,7 @@ jobs:
 
       - run: npm i
       - run: lerna init
-      - run: lerna bootstrap
+      - run: lerna bootstrap --hoist
 
       - save_cache:
           paths:
