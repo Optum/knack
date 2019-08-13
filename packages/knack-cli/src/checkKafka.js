@@ -1,6 +1,6 @@
 const {KnackProducer} = require('@optum/knack-producer');
 
-const main = async brokers => {
+const main = async ({brokers}) => {
 	try {
 		const config = {
 			producerConfig: {

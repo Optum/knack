@@ -22,70 +22,49 @@ $ npm i -g @optum/knack-cli
 
 ```shell
 $ knack --help
- A cli for working with Apache Kafka development.
 
-  -------------------------------------
+  A cli for working with Apache Kafka development.
+
    _   __ _   _   ___   _____  _   __
   | | / /| \ | | / _ \ /  __ \| | / /
   | |/ / |  \| |/ /_\ \| /  \/| |/ / 
   |    \ | . ` ||  _  || |    |    \ 
   | |\  \| |\  || | | || \__/\| |\  \ 
   \_| \_/\_| \_/\_| |_/ \____/\_| \_/
-  -------------------------------------
+
+
+  command register-avro-schema
+      options
+      --avsc alias --a string 
+      --topic alias --t [string] 
+      --type alias --ty string subject type (i.e. key or value)
   
-  Usage
-  $ knack [command] [options]
+  command verify-avro-schema
+      options
+      --avsc alias --a string 
+      --data alias --d string path to json file containing data
+      --show alias --s [string] show data after encode -> decode
   
-  Command
-  verify-avro-schema    validate an avro schema against json data
+  command convert-avsc
+      options
+      --avsc alias --a string 
+      --format alias --f string target format
+      --output alias --o string file output path
   
-  Options
-  --avsc    file path to avro schema
-  --data    file path to json data to validate
-  --show    flag indicating to show data after it is encoded then decoded
+  command consume
+      options
+      --consumerConfig alias --cc [string] path to json file containing librd consumer settings
+      --topicConfig alias --tc [string] path to json file containing librd topic settings
   
-  Examples
-  $ knack verify-avro-schema --avsc /path/to/schema.avsc --data /path/to/data.json
+  command produce
+      options
+      --producerConfig alias --pc [string] path to json file containing librd producer settings
+      --topic alias --t [string] 
+      --key alias --k [string] path to json file containing key data
+      --value alias --v string path to json file containing value data
+      --count alias --c [string] number of times to run the action
   
-  
-  Command
-  register-avro-schema    register a schema via the topic and type (i.e. key or value)
-  
-  Options
-  --avsc    file path to avro schema
-  --topic   topic to register schema under
-  --type    subject type (i.e. key or value)
-  
-  Examples
-  $ knack register-avro-schema --avsc /path/to/schema.avsc --topic test-client-topic-v1 --type value
-  
-  
-  Command
-  produce    produce a Kafka record (formats: string, json, avro)
-  
-  Options
-  --key      file path to key message
-  --value    file path to value message
-  --topic    publish record to this topic
-  --count    number of record to publish
-  Examples
-  $ knack produce --topic test-client-topic-v1 --key /path/to/message-key.json --value /path/to/message-value.json
-  
-  
-  Command
-  consume    consume a Kafka topic
-  
-  Options
-  --topic    consume records from this topic
-  Examples
-  $ knack consume --topic test-client-topic-v1
-  
-  
-  Command
-  check-kafka    check kafka status and get metadata
-  
-  Options
-  --brokers    comma separated list of brokers
-  Examples
-  $ knack check-kafka --brokers localhost:9092
+  command check-kafka
+      options
+      --brokers alias --b [string] comma separated list of brokers
 ```

@@ -3,8 +3,8 @@ const knackConsumerClient = require('@optum/knack-consumer-client');
 
 // TOOD: make consumer and topic config configurable
 const defaultConsumerConfig = {
-	'client.id': 'my-kafka-client-v2',
-	'group.id': 'my-kafka-group-v2',
+	'client.id': 'knack-test-client-v1',
+	'group.id': 'knack-test-group-v1',
 	'metadata.broker.list': 'localhost:9092',
 	'socket.keepalive.enable': true,
 	'enable.auto.commit': true
@@ -17,7 +17,7 @@ const defaultTopicConfig = {
 	event_cb: () => {}
 };
 
-const getConfigs = async ({consumerConfigPath, topicConfigPath}) => {
+const getConfigs = async ({consumerConfig: consumerConfigPath, topicConfig: topicConfigPath}) => {
 	let consumerConfig = defaultConsumerConfig;
 	let topicConfig = defaultTopicConfig;
 
@@ -61,10 +61,12 @@ const main = async ({topic, consumerConfigPath, topicConfigPath}) => {
 			topicConfig
 		});
 
-		process.on('SIGINT', () => {
+		process.on('SIGINT', async () => {
 			console.log('\ninterrupt signal detected');
 			console.log('disconnecting consumer');
-			knackConsumerClient.disconnect();
+			try {
+				await knackConsumerClient.disconnect();
+			} catch (_) {}
 		});
 
 		return {

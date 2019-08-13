@@ -2,7 +2,8 @@ const assert = require('assert').strict;
 const fs = require('fs-extra');
 const KnackSr = require('@optum/knack-sr');
 
-const main = async (subject, avscPath) => {
+const main = async ({topic, type, avsc: avscPath}) => {
+	const subject = `${topic}-${type}`;
 	const sr = new KnackSr();
 	const avroSchema = await fs.readJson(avscPath);
 

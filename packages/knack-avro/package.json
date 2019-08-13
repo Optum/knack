@@ -28,7 +28,9 @@
     "kafka"
   ],
   "dependencies": {
-    "avsc": "^5.4.10"
+    "avsc": "^5.4.10",
+    "is-object-empty": "^2.0.1",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "ava": "^1.4.1",

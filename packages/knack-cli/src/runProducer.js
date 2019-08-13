@@ -15,7 +15,13 @@ const resolveContent = async filePath => {
 	}
 };
 
-const main = async (keyFilePath, valuefilePath, topic, count, producerConfigPath) => {
+const main = async ({
+	key: keyFilePath,
+	value: valuefilePath,
+	topic,
+	count,
+	producerConfig: producerConfigPath
+}) => {
 	const key = await resolveContent(keyFilePath);
 	const value = await resolveContent(valuefilePath);
 

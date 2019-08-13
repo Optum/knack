@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const {fromAvroBuffer, toAvroBuffer} = require('@optum/knack-avro');
 
-const main = async (avscPath, dataPath, show = false) => {
+const main = async ({avsc: avscPath, data: dataPath, show}) => {
 	const avscSchemaJson = await fs.readJson(avscPath);
 	const dataJson = await fs.readJson(dataPath);
 	const placeHolderSchemaId = 123;
