@@ -29,9 +29,8 @@ jobs:
       - store_artifacts:
           path: coverage
       - persist_to_workspace:
-          root: coverage
-          paths: 
-            - lcov.info
+          root: ~/repo
+          paths: coverage
   upload-codecov:
     <<: *defaults
     steps:
@@ -39,6 +38,7 @@ jobs:
           at: ~/repo
       - codecov/upload:
           file: coverage/lcov.info
+          flags: 'unittests'
 
 workflows:
   version: 2.1
