@@ -1,7 +1,7 @@
 const fsExtra = require('fs-extra');
 const {streams} = require('@optum/knack-avro');
 
-const {avscToEsMappings, avscToJsonSchema, avscToJoiObject} = streams;
+const {avscToEsMappings, avscToJsonSchema} = streams;
 
 const formats = {
 	es: {
@@ -9,9 +9,6 @@ const formats = {
 	},
 	json: {
 		converter: avscToJsonSchema
-	},
-	joi: {
-		converter: avscToJoiObject
 	}
 };
 
