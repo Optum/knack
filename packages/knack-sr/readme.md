@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+ <a href="https://www.npmjs.com/package/@optum/knack-sr"><img src="https://img.shields.io/npm/v/@optum/knack-sr?color=blue"></a>
   <a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg"></a>
 </p>
 

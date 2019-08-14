@@ -19,19 +19,19 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 
 | name  |  version |
 |---|---|
-| [<b>`knack-avro`</b>](packages/knack-avro) | 1.0.0 |
+| [<b>`knack-avro`</b>](packages/knack-avro) | <a href="https://www.npmjs.com/package/@optum/knack-avro"><img src="https://img.shields.io/npm/v/@optum/knack-avro?color=blue"></a> |
 |A module for encoding and decoding avro with Kafka.|
-| [<b>`knack-consumer`</b>](packages/knack-consumer) | 1.0.0 |
+| [<b>`knack-consumer`</b>](packages/knack-consumer) | <a href="https://www.npmjs.com/package/@optum/knack-consumer"><img src="https://img.shields.io/npm/v/@optum/knack-consumer?color=blue"></a> |
 |A module for consuming messages from Apache Kafka.|
-| [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | 1.0.0 |
+| [<b>`knack-consumer-client`</b>](packages/knack-consumer-client) | <a href="https://www.npmjs.com/package/@optum/knack-consumer-client"><img src="https://img.shields.io/npm/v/@optum/knack-consumer-client?color=blue"></a> |
 |A module for consuming records from Apache Kafka with integrated avro support.|
-| [<b>`knack-producer`</b>](packages/knack-producer) | 1.0.0 |
+| [<b>`knack-producer`</b>](packages/knack-producer) | <a href="https://www.npmjs.com/package/@optum/knack-producer"><img src="https://img.shields.io/npm/v/@optum/knack-producer?color=blue"></a> |
 |A module for publishing to Apache Kafka.|
-| [<b>`knack-producer-client`</b>](packages/knack-producer-client) | 1.0.0 |
+| [<b>`knack-producer-client`</b>](packages/knack-producer-client) | <a href="https://www.npmjs.com/package/@optum/knack-producer-client"><img src="https://img.shields.io/npm/v/@optum/knack-producer-client?color=blue"></a> |
 |A module for publishing records to Apache Kafka with integrated avro support.|
-| [<b>`knack-sr`</b>](packages/knack-sr) | 1.0.0 |
+| [<b>`knack-sr`</b>](packages/knack-sr) | <a href="https://www.npmjs.com/package/@optum/knack-sr"><img src="https://img.shields.io/npm/v/@optum/knack-sr?color=blue"></a> |
 |A module for interacting with the Kafka Schema Registry.|
-| [<b>`knack-cli`</b>](packages/knack-cli) | 1.0.0 |
+| [<b>`knack-cli`</b>](packages/knack-cli) | <a href="https://www.npmjs.com/package/@optum/knack-cli"><img src="https://img.shields.io/npm/v/@optum/knack-cli?color=blue"></a> |
 |A cli for working with Apache Kafka development.|
 
 ## Development
@@ -40,17 +40,13 @@ initialize lerna for all packages
 
 ```shell
 $ lerna init
-$ lerna bootstrap
+$ lerna bootstrap --hoist
 ```
 
 run tests
 
 ```shell
-$ lerna run test
-# or
-$ npm run lint-test --silent
-# or in each package dir
-$ npm run test
+$ npm test
 ```
 
 ## Examples

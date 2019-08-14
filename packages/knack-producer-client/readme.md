@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+ <a href="https://www.npmjs.com/package/@optum/knack-producer-client"><img src="https://img.shields.io/npm/v/@optum/knack-producer-client?color=blue"></a>
   <a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg"></a>
 </p>
 
