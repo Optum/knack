@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-consumer",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A module for consuming messages from Apache Kafka.",
   "license": "Apache-2.0",
   "licenses": [
@@ -14,6 +14,9 @@
     "name": "lxghtless",
     "email": "william.kurth@optum.com",
     "url": "github.com/lxghtless"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=8"

@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-avro",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A module for encoding and decoding avro with Kafka.",
   "license": "Apache-2.0",
   "licenses": [
@@ -15,6 +15,9 @@
     "email": "william.kurth@optum.com",
     "url": "github.com/lxghtless"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=8"
   },
@@ -28,7 +31,7 @@
     "kafka"
   ],
   "dependencies": {
-    "avsc": "^5.4.10",
+    "avsc": "^5.4.12",
     "is-object-empty": "^2.0.1",
     "ramda": "^0.26.1"
   },
