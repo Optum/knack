@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-producer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A module for publishing to Apache Kafka.",
   "license": "Apache-2.0",
   "licenses": [
