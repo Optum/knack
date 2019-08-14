@@ -113,7 +113,7 @@ const meowOptions = {
 			type: 'string',
 			alias: 'f',
 			required: true,
-			description: 'target format'
+			description: 'target format: es (elastic mapping), json (json schema)'
 		},
 		output: {
 			command: 'convert-avsc',
@@ -145,7 +145,8 @@ const meowOptions = {
 			parser: defaultParser
 		},
 		'convert-avsc': {
-			action: convertAvsc
+			action: convertAvsc,
+			description: 'convert an avsc to other formats'
 		}
 	}
 };

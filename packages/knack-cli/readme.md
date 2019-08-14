@@ -47,9 +47,10 @@ $ knack --help
       --show alias --s [string] show data after encode -> decode
   
   command convert-avsc
+  convert an avsc to other formats
       options
       --avsc alias --a string 
-      --format alias --f string target format
+      --format alias --f string target format: es (elastic mapping), json (json schema)
       --output alias --o string file output path
   
   command consume

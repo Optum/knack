@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 const defaultCmd = '<command>';
 
-const parseCmdGrps = flags => {
+const parseCmdGrps = ({flags, commands: commandOptions}) => {
 	const cmdGrps = {};
 
 	for (const flagKey of Object.keys(flags)) {
@@ -21,12 +21,18 @@ const parseCmdGrps = flags => {
 			});
 		} else if (commands) {
 			for (const cmd of commands) {
-				if (!cmdGrps[cmd]) {
-					cmdGrps[cmd] = [];
+				let cmdKey = cmd;
+
+				if (cmd.name) {
+					cmdKey = cmd.name;
 				}
 
-				cmdGrps[cmd].push({
-					command: cmd,
+				if (!cmdGrps[cmdKey]) {
+					cmdGrps[cmdKey] = [];
+				}
+
+				cmdGrps[cmdKey].push({
+					command: cmdKey,
 					flag,
 					flagKey
 				});
@@ -44,12 +50,22 @@ const parseCmdGrps = flags => {
 		}
 	}
 
+	if (commandOptions) {
+		for (const cmdOptionKey of Object.keys(commandOptions)) {
+			if (!cmdGrps[cmdOptionKey]) {
+				cmdGrps[cmdOptionKey] = {
+					command: cmdOptionKey
+				};
+			}
+		}
+	}
+
 	return cmdGrps;
 };
 
 const halpValidate = (cli, options) => {
 	const command = cli.input[0];
-	const cmdGrps = parseCmdGrps(options.flags);
+	const cmdGrps = parseCmdGrps({...cli, commands: options.commands});
 
 	let cmdGrp;
 
@@ -64,9 +80,11 @@ const halpValidate = (cli, options) => {
 		for (const flagInfoKey of Object.keys(cmdGrp)) {
 			const flagInfo = cmdGrp[flagInfoKey];
 			const {flag, flagKey} = flagInfo;
-			const {required} = flag;
-			if (required) {
-				assert.ok(cli.flags[flagKey] !== undefined, `--${flagKey} is required`);
+			if (flag && flagKey) {
+				const {required} = flag;
+				if (required) {
+					assert.ok(cli.flags[flagKey] !== undefined, `--${flagKey} is required`);
+				}
 			}
 		}
 	}
@@ -74,23 +92,33 @@ const halpValidate = (cli, options) => {
 	return cli;
 };
 
-const optionsTextFormatter = ({flagKey, alias, type, description, required}) => {
+const optionsTextFormatter = ({flagKey, alias, type, description, required, cmdGrpKey, commands}) => {
 	const aliasText = alias && `alias --${alias}`;
 	let typeText = type && 'string';
+	let _required = required;
+	let _description = description;
 
-	if (required) {
+	if (Array.isArray(commands)) {
+		const innerOptions = commands.find(c => c.name === cmdGrpKey);
+		if (innerOptions) {
+			_required = innerOptions.required;
+			_description = innerOptions.description;
+		}
+	}
+
+	if (_required) {
 		typeText = chalk.bold(typeText);
 	} else {
 		typeText = `[${typeText}]`;
 	}
 
-	const optionText = `--${flagKey} ${aliasText} ${typeText} ${description || ''}`;
+	const optionText = `--${flagKey} ${aliasText} ${typeText} ${_description || ''}`;
 
 	return optionText;
 };
 
-const halpText = ({flags}, bannerText = '') => {
-	const cmdGrps = parseCmdGrps(flags);
+const halpText = ({flags, commands}, bannerText = '') => {
+	const cmdGrps = parseCmdGrps({flags, commands});
 
 	const halps = [];
 
@@ -98,15 +126,19 @@ const halpText = ({flags}, bannerText = '') => {
 		const cmdGrp = cmdGrps[cmdGrpKey];
 
 		let halp = chalk.whiteBright('command') + chalk.whiteBright.bold(` ${cmdGrpKey}\n`);
+		halp += chalk.blueBright(commands[cmdGrpKey].description ? `${commands[cmdGrpKey].description}\n` : '');
 		halp += chalk.magentaBright('    options\n');
 
 		for (const flagInfoKey of Object.keys(cmdGrp)) {
 			const {flag, flagKey} = cmdGrp[flagInfoKey];
-			const optionText = optionsTextFormatter({
-				...flag,
-				flagKey
-			});
-			halp += chalk.greenBright(`    ${optionText}\n`);
+			if (flag && flagKey) {
+				const optionText = optionsTextFormatter({
+					...flag,
+					flagKey,
+					cmdGrpKey
+				});
+				halp += chalk.greenBright(`    ${optionText}\n`);
+			}
 		}
 
 		halps.push(halp);
@@ -119,4 +151,3 @@ module.exports = {
 	halpText,
 	halpValidate
 };
-
