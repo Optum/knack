@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A cli for working with Apache Kafka development.",
   "license": "Apache-2.0",
   "licenses": [
