@@ -17,7 +17,7 @@ const defaultTopicConfig = {
 	event_cb: () => {}
 };
 
-const getConfigs = async ({consumerConfig: consumerConfigPath, topicConfig: topicConfigPath}) => {
+const getConfigs = async ({consumerConfig, topicConfig}) => {
 	let consumerConfig = defaultConsumerConfig;
 	let topicConfig = defaultTopicConfig;
 
@@ -35,7 +35,7 @@ const getConfigs = async ({consumerConfig: consumerConfigPath, topicConfig: topi
 	};
 };
 
-const main = async ({topic, consumerConfigPath, topicConfigPath}) => {
+const main = async ({topic, consumerConfig: consumerConfigPath, topicConfig: topicConfigPath, srUrl}) => {
 	try {
 		const handler = async ({key, value, timestamp, topic}) => {
 			console.log('key', key);
@@ -54,11 +54,20 @@ const main = async ({topic, consumerConfigPath, topicConfigPath}) => {
 			topicConfigPath
 		});
 
+		let srOptions;
+
+		if (srUrl) {
+			srOptions = {
+				url: srUrl
+			};
+		}
+
 		await knackConsumerClient.connect({
 			subscriptions: [subscription],
 			flowMode: true,
 			consumerConfig,
-			topicConfig
+			topicConfig, 
+			srOptions
 		});
 
 		process.on('SIGINT', async () => {
