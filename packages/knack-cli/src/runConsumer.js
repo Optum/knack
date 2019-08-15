@@ -17,16 +17,20 @@ const defaultTopicConfig = {
 	event_cb: () => {}
 };
 
-const getConfigs = async ({consumerConfig, topicConfig}) => {
+const getConfigs = async ({consumerConfigPath, topicConfigPath}) => {
 	let consumerConfig = defaultConsumerConfig;
 	let topicConfig = defaultTopicConfig;
 
 	if (consumerConfigPath) {
 		consumerConfig = await readJson(consumerConfigPath);
+		console.log('using provided consumer config');
+		console.log(consumerConfig);
 	}
 
 	if (topicConfigPath) {
 		topicConfig = await readJson(topicConfigPath);
+		console.log('using provided topic config');
+		console.log(topicConfig);
 	}
 
 	return {
