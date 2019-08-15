@@ -70,7 +70,7 @@ const main = async ({topic, consumerConfig: consumerConfigPath, topicConfig: top
 			subscriptions: [subscription],
 			flowMode: true,
 			consumerConfig,
-			topicConfig, 
+			topicConfig,
 			srOptions
 		});
 
