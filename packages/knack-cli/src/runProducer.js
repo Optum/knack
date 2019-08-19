@@ -20,16 +20,31 @@ const main = async ({
 	value: valuefilePath,
 	topic,
 	count,
-	producerConfig: producerConfigPath
+	producerConfig: producerConfigPath,
+	srUrl
 }) => {
 	const key = await resolveContent(keyFilePath);
 	const value = await resolveContent(valuefilePath);
 
 	let producer;
+	let knackProducerConfig;
 
 	if (producerConfigPath) {
 		const producerConfig = await resolveContent(producerConfigPath);
+		knackProducerConfig = {producerConfig};
 		producer = await KnackProducerClient.resolveInstance({producerConfig});
+	} else {
+		producer = await KnackProducerClient.resolveInstance();
+	}
+
+	if (srUrl) {
+		knackProducerConfig.srOptions = {
+			url: srUrl
+		};
+	}
+
+	if (knackProducerConfig) {
+		producer = await KnackProducerClient.resolveInstance(knackProducerConfig);
 	} else {
 		producer = await KnackProducerClient.resolveInstance();
 	}
