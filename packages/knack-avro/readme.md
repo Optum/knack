@@ -79,11 +79,52 @@ console.log(value);
 */
 ```
 
-### AST
+### Convert Avro Schema to Elastic Mapping
 
-<b>example</b>
+<b>methods</b>
 
-```json
+- streams.avscToEsMappings: (avroSchema)
+  + convert avro schema to es mapping
+    * avroSchema: `Object`  json object representation of avro schema
 
+```js
+const fsExtra = require('fs-extra');
+const {streams} = require('@optum/knack-avro');
+
+const {avscToEsMappings} = streams;
+
+const main = async () => {
+	const avscPath = '~/path/to/mySchema.avsc';
+	const outputPath = '~/path/to/outputEsMapping.json';
+	
+	const avroSchema = await fsExtra.readJson(avscPath);
+	const content = avscToJsonSchema(avroSchema);
+
+	await fsExtra.outputJson(outputPath, content);
+};
 ```
 
+### Convert Avro Schema to JSON Schema
+
+<b>methods</b>
+
+- streams.avscToJsonSchema: (avroSchema)
+  + convert avro schema to json schema
+    * avroSchema: `Object`  json object representation of avro schema
+
+```js
+const fsExtra = require('fs-extra');
+const {streams} = require('@optum/knack-avro');
+
+const {avscToJsonSchema} = streams;
+
+const main = async () => {
+	const avscPath = '~/path/to/mySchema.avsc';
+	const outputPath = '~/path/to/outputJsonSchema.json';
+	
+	const avroSchema = await fsExtra.readJson(avscPath);
+	const content = avscToJsonSchema(avroSchema);
+
+	await fsExtra.outputJson(outputPath, content);
+};
+```
