@@ -10,10 +10,14 @@ const options = {
 };
 
 const collectInvalidPaths = (type, val) => {
-	var paths = [];
-	type.isValid(val, {errorHook: function (path, object) { paths.push(path.join(':') + ' is ' + object); }});
+	const paths = [];
+	type.isValid(val, {
+		function(path, object) {
+			paths.push(path.join(':') + ' is ' + object);
+		}
+	});
 	return paths;
-}
+};
 
 const mapDecoded = (decoded, schemaId) => {
 	if (options.mapDecoded) {
@@ -60,9 +64,10 @@ const toAvroBuffer = (val, schema, schemaId, optLength) => {
 	buf.writeInt32BE(schemaId, 1);
 
 	const invalidPaths = collectInvalidPaths(type, val);
-	if(invalidPaths.length > 0) {
+	if (invalidPaths.length > 0) {
 		throw new TypeError('invalid path(s) in object: ' + invalidPaths.join(', '));
 	}
+
 	const pos = type.encode(val, buf, 5);
 
 	if (pos < 0) {
