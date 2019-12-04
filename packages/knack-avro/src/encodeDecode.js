@@ -2,11 +2,23 @@ const avro = require('avsc');
 
 const MAGIC_BYTE = 0;
 
+const DISABLE_BETTER_ERROR_MESSAGES = process.env.KNACK_DISABLE_BETTER_ERROR_MESSAGES;
+
 const typeStore = {};
 
 const options = {
 	resolveType: undefined,
 	mapDecoded: undefined
+};
+
+const collectInvalidPaths = (type, val) => {
+	const paths = [];
+	type.isValid(val, {
+		function(path, object) {
+			paths.push(path.join(':') + ' is ' + object);
+		}
+	});
+	return paths;
 };
 
 const mapDecoded = (decoded, schemaId) => {
@@ -52,6 +64,13 @@ const toAvroBuffer = (val, schema, schemaId, optLength) => {
 
 	buf[0] = MAGIC_BYTE;
 	buf.writeInt32BE(schemaId, 1);
+
+	if (!DISABLE_BETTER_ERROR_MESSAGES) {
+		const invalidPaths = collectInvalidPaths(type, val);
+		if (invalidPaths.length > 0) {
+			throw new TypeError('invalid path(s) in object: ' + invalidPaths.join(', '));
+		}
+	}
 
 	const pos = type.encode(val, buf, 5);
 
