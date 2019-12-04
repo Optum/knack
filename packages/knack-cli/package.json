@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A cli for working with Apache Kafka development.",
   "license": "Apache-2.0",
   "licenses": [
@@ -62,10 +62,10 @@
     }
   },
   "dependencies": {
-    "@optum/knack-avro": "^0.3.0",
-    "@optum/knack-consumer-client": "^0.3.0",
+    "@optum/knack-avro": "^0.3.1",
+    "@optum/knack-consumer-client": "^0.3.1",
     "@optum/knack-producer": "^0.3.0",
-    "@optum/knack-producer-client": "^0.3.0",
+    "@optum/knack-producer-client": "^0.3.1",
     "@optum/knack-sr": "^0.3.0",
     "avsc": "^5.4.12",
     "chalk": "^2.4.2",
