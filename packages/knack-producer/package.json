@@ -18,9 +18,9 @@
   "publishConfig": {
     "access": "public"
   },
-	"engines": {
-		"node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
-	},
+  "engines": {
+    "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
+  },
   "scripts": {
     "test": "xo && nyc ava"
   },
@@ -44,20 +44,18 @@
     "xo": "^0.27.2"
   },
   "nyc": {
+    "all": true,
     "reporter": [
       "lcov",
       "text"
-    ]
-  },
-  "ava": {
-    "files": [
-			"!test/utils/**/*.js"
-		],
-    "sources": [
+    ],
+    "include": [
       "index.js",
       "knackProducer.js",
       "knackHighLevelProducer.js"
-    ],
+    ]
+  },
+  "ava": {
     "concurrency": 5,
     "failFast": true,
     "failWithoutAssertions": false,

@@ -1,13 +1,42 @@
 const test = require('ava');
+const {EventEmitter} = require('events');
+const {spy} = require('sinon');
 const proxyquire = require('proxyquire');
-const {nodeRdMocker} = require('./utils');
+
+function buildProducerMock() {
+	class ProducerMock extends EventEmitter {
+		constructor(producerConfig) {
+			super();
+			this.producerConfig = producerConfig;
+			this.connectEventName = 'ready';
+			this.disconnectEventName = 'disconnected';
+			this.produce = spy(this.produce.bind(this));
+			this.connect = spy(this.connect.bind(this));
+			this.disconnect = spy(this.disconnect.bind(this));
+		}
+
+		produce() {}
+
+		connect() {
+			this.emit(this.connectEventName);
+		}
+
+		disconnect() {
+			this.emit(this.disconnectEventName);
+		}
+	}
+
+	Object.setPrototypeOf(ProducerMock, spy());
+
+	return ProducerMock;
+}
 
 test.before('setup test', t => {
 	proxyquire
 		.noCallThru()
 		.noPreserveCache();
 
-	const KafkaProducer = nodeRdMocker.buildProducerMock();
+	const KafkaProducer = buildProducerMock();
 
 	const KnackProducer = proxyquire('../knackProducer', {
 		'node-rdkafka': {
