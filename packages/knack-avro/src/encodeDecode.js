@@ -13,10 +13,9 @@ const options = {
 
 const collectInvalidPaths = (type, val) => {
 	const paths = [];
-	type.isValid(val, {errorHook:
-		function(path, object) {
-			paths.push(path.join(':') + ' is ' + object);
-		}
+	type.isValid(val, {errorHook(path, object) {
+		paths.push(path.join(':') + ' is ' + object);
+	}
 	});
 	return paths;
 };
