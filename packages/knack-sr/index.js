@@ -21,17 +21,13 @@ class SchemaRegistry {
 
 	async getSchemaById(schemaId) {
 		const url = `${this.baseUri}/schemas/ids/${schemaId}`;
-		const {body} = await got(url, {
-			json: true
-		});
+		const body = await got(url, {responseType: 'json', resolveBodyOnly: true});
 		return body;
 	}
 
 	async getSchemaBySubject(subject) {
 		const url = `${this.baseUri}/subjects/${subject}/versions/latest`;
-		const {body} = await got(url, {
-			json: true
-		});
+		const body = await got(url, {responseType: 'json', resolveBodyOnly: true});
 		return body;
 	}
 
@@ -48,11 +44,12 @@ class SchemaRegistry {
 			body: {
 				schema: strSchema
 			},
-			json: true
+			responseType: 'json',
+			resolveBodyOnly: true
 		};
 
 		const url = `${this.baseUri}/subjects/${subject}/versions`;
-		const {body} = await got.post(url, options);
+		const body = await got.post(url, options);
 		return body;
 	}
 }

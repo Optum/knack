@@ -1,49 +1,51 @@
 {
-  "name": "@optum/knack-packages",
-  "private": true,
-  "scripts": {
-    "test": "xo && nyc ava"
-  },
-  "devDependencies": {
-    "ava": "^2.2.0",
-    "husky": "^3.0.1",
-    "lerna": "^3.19.0",
-    "nyc": "^14.1.0",
-    "xo": "^0.24.0"
-  },
-  "ava": {
-    "files": [
-      "packages/knack-*/test/**/*.test.js"
-    ],
-    "concurrency": 5,
-    "failFast": true,
-    "failWithoutAssertions": false,
-    "environmentVariables": {},
-    "tap": false,
-    "verbose": true,
-    "compileEnhancements": false
-  },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text"
-    ]
-  },
-  "xo": {
-    "rules": {
-      "unicorn/catch-error-name": [
-        "error",
-        {
-          "caughtErrorsIgnorePattern": "^_$"
-        }
-      ],
-      "unicorn/filename-case": [
-        "error",
-        {
-          "case": "camelCase"
-        }
-      ],
-      "capitalized-comments": 0
-    }
-  }
+	"name": "@optum/knack-packages",
+	"private": true,
+	"engines": {
+		"node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
+	},
+	"scripts": {
+		"test": "xo && nyc ava"
+	},
+	"devDependencies": {
+		"ava": "^3.5.0",
+		"husky": "^3.0.1",
+		"lerna": "^3.20.2",
+		"nyc": "^15.0.0",
+		"xo": "^0.27.2"
+	},
+	"ava": {
+		"files": [
+			"packages/knack-*/test/**/*.test.js"
+		],
+		"concurrency": 5,
+		"failFast": true,
+		"failWithoutAssertions": false,
+		"environmentVariables": {},
+		"tap": false,
+		"verbose": true
+	},
+	"nyc": {
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	},
+	"xo": {
+		"rules": {
+			"unicorn/catch-error-name": [
+				"error",
+				{
+					"caughtErrorsIgnorePattern": "^_$"
+				}
+			],
+			"unicorn/filename-case": [
+				"error",
+				{
+					"case": "camelCase"
+				}
+			],
+			"capitalized-comments": 0
+		}
+	}
 }
