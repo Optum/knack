@@ -3,7 +3,7 @@ const {fromAvroBuffer} = require('@optum/knack-avro');
 const tryParse = str => {
 	try {
 		return JSON.parse(str);
-	} catch (error) {
+	} catch (_) {
 		return str;
 	}
 };
