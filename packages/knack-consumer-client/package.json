@@ -1,79 +1,80 @@
 {
-  "name": "@optum/knack-consumer-client",
-  "version": "0.3.1",
-  "description": "A module for consuming records with Apache Kafka.",
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
-  "repository": "optum/knack",
-  "author": {
-    "name": "lxghtless",
-    "email": "william.kurth@optum.com",
-    "url": "https://github.com/lxghtless"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "engines": {
-    "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
-  },
-  "scripts": {
-    "test": "xo && nyc ava"
-  },
-  "files": [
-    "index.js",
-    "parseRecord.js"
-  ],
-  "keywords": [
-    "kafka"
-  ],
-  "dependencies": {
-    "@optum/knack-avro": "^0.3.1",
-    "@optum/knack-consumer": "^0.3.0",
-    "@optum/knack-sr": "^0.3.0",
-    "quick-lru": "^5.0.0"
-  },
-  "devDependencies": {
-    "ava": "^3.5.0",
-    "nock": "^12.0.2",
-    "nyc": "^15.0.0",
-    "proxyquire": "^2.1.3",
-    "sinon": "^9.0.0",
-    "xo": "^0.27.2"
-  },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text"
-    ]
-  },
-  "ava": {
-    "concurrency": 5,
-    "failFast": true,
-    "failWithoutAssertions": false,
-    "environmentVariables": {},
-    "tap": false,
-    "verbose": true
-  },
-  "xo": {
-    "rules": {
-      "unicorn/catch-error-name": [
-        "error",
-        {
-          "caughtErrorsIgnorePattern": "^_$"
-        }
-      ],
-      "unicorn/filename-case": [
-        "error",
-        {
-          "case": "camelCase"
-        }
-      ],
-      "capitalized-comments": 0
-    }
-  }
+	"name": "@optum/knack-consumer-client",
+	"version": "0.4.0",
+	"description": "A module for consuming records with Apache Kafka.",
+	"license": "Apache-2.0",
+	"licenses": [
+		{
+			"type": "Apache-2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0"
+		}
+	],
+	"repository": "optum/knack",
+	"author": {
+		"name": "lxghtless",
+		"email": "william.kurth@optum.com",
+		"url": "https://github.com/lxghtless"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
+	},
+	"scripts": {
+		"test": "xo && nyc ava",
+		"lint": "xo --fix"
+	},
+	"files": [
+		"index.js",
+		"parseRecord.js"
+	],
+	"keywords": [
+		"kafka"
+	],
+	"dependencies": {
+		"@optum/knack-avro": "^0.4.0",
+		"@optum/knack-consumer": "^0.4.0",
+		"@optum/knack-sr": "^0.4.0",
+		"quick-lru": "^5.0.0"
+	},
+	"devDependencies": {
+		"ava": "^3.5.0",
+		"nock": "^12.0.2",
+		"nyc": "^15.0.0",
+		"proxyquire": "^2.1.3",
+		"sinon": "^9.0.0",
+		"xo": "^0.27.2"
+	},
+	"nyc": {
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	},
+	"ava": {
+		"concurrency": 5,
+		"failFast": true,
+		"failWithoutAssertions": false,
+		"environmentVariables": {},
+		"tap": false,
+		"verbose": true
+	},
+	"xo": {
+		"rules": {
+			"unicorn/catch-error-name": [
+				"error",
+				{
+					"caughtErrorsIgnorePattern": "^_$"
+				}
+			],
+			"unicorn/filename-case": [
+				"error",
+				{
+					"case": "camelCase"
+				}
+			],
+			"capitalized-comments": 0
+		}
+	}
 }
