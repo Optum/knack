@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-consumer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A module for consuming messages from Apache Kafka.",
   "license": "Apache-2.0",
   "licenses": [

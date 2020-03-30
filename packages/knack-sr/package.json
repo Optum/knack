@@ -1,6 +1,6 @@
 {
   "name": "@optum/knack-sr",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A module for interacting with the Kafka Schema Registry.",
   "license": "Apache-2.0",
   "licenses": [
@@ -18,9 +18,9 @@
   "publishConfig": {
     "access": "public"
   },
-	"engines": {
-		"node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
-	},
+  "engines": {
+    "node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
+  },
   "scripts": {
     "test": "xo && nyc ava"
   },
@@ -49,8 +49,8 @@
   },
   "ava": {
     "files": [
-			"!test/utils/**/*.js"
-		],
+      "!test/utils/**/*.js"
+    ],
     "sources": [
       "index.js"
     ],
