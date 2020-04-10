@@ -3,7 +3,9 @@ const {
 	astToJsonSchema,
 	avscToAst,
 	encodeDecode,
-	streams
+	streams,
+	toJsonSchema,
+	toElasticMapping
 } = require('./src');
 
 const {
@@ -19,5 +21,7 @@ module.exports = {
 	toAvroBuffer,
 	fromAvroBuffer,
 	encodeDecodeOptions,
-	streams
+	streams,
+	toJsonSchema,
+	toElasticMapping
 };

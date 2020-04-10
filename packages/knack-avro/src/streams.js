@@ -1,9 +1,7 @@
-const {pipe} = require('ramda');
-const avscToAst = require('./avscToAst');
-const astToEsMappings = require('./astToEsMappings');
-const astToJsonSchema = require('./astToJsonSchema');
+const {toElasticMapping} = require('./avscToElasticMapping');
+const {toJsonSchema} = require('./avscToJsonSchema');
 
 module.exports = {
-	avscToEsMappings: pipe(avscToAst, astToEsMappings),
-	avscToJsonSchema: pipe(avscToAst, astToJsonSchema)
+	avscToEsMappings: toElasticMapping,
+	avscToJsonSchema: toJsonSchema
 };
