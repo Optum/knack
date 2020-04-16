@@ -39,13 +39,15 @@ const meowOptions = {
 			commands: ['register-avro-schema', 'verify-avro-schema', 'convert-avsc'],
 			type: 'string',
 			alias: 'a',
-			required: true
+			required: true,
+			description: 'avro schema input'
 		},
 		json: {
 			commands: ['convert-json'],
 			type: 'string',
 			alias: 'j',
-			required: true
+			required: true,
+			description: 'json schema input'
 		},
 		consumerConfig: {
 			command: 'consume',
