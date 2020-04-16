@@ -2,7 +2,6 @@ export {astToEsMappings} from './astToEsMappings'
 export {astToJsonSchema} from './astToJsonSchema'
 export {avscToAst} from './avscToAst'
 export {toAvroBuffer, fromAvroBuffer, options} from './encodeDecode'
-export {avscToEsMappings, avscToJsonSchema, jsonSchemaToAvsc} from './streams'
 export {toJsonSchema} from './avscToJsonSchema'
 export {toElasticMapping} from './avscToElasticMapping'
 export {toAvscType} from './jsonSchemaToAvsc'
@@ -23,3 +22,10 @@ export {
     EncodeDecodeOptions,
     TypeStore
 } from './types'
+export {avscToEsMappings, avscToJsonSchema, jsonSchemaToAvsc} from './streams'
+import {avscToEsMappings, avscToJsonSchema, jsonSchemaToAvsc} from './streams'
+export const streams = {
+    avscToEsMappings,
+    avscToJsonSchema,
+    jsonSchemaToAvsc
+}
