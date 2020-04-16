@@ -5,25 +5,16 @@
 		"node": ">=10.18.0 <11 || >=12.14.0 <13 || >=13.5.0"
 	},
 	"scripts": {
-		"test": "xo && nyc ava"
+		"pretest": "xo",
+		"test": "lerna run test",
+		"posttest": "node ./monorepoMergeReports.js && nyc report"
 	},
 	"devDependencies": {
-		"ava": "^3.5.0",
 		"husky": "^3.0.1",
 		"lerna": "^3.20.2",
 		"nyc": "^15.0.0",
-		"xo": "^0.27.2"
-	},
-	"ava": {
-		"files": [
-			"packages/knack-*/test/**/*.test.js"
-		],
-		"concurrency": 5,
-		"failFast": true,
-		"failWithoutAssertions": false,
-		"environmentVariables": {},
-		"tap": false,
-		"verbose": true
+		"rimraf": "^3.0.2",
+		"xo": "^0.29.1"
 	},
 	"nyc": {
 		"reporter": [

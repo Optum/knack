@@ -1,1 +1,23 @@
-{"$schema":"http://json-schema.org/draft-07/schema","$id":"#/io/knack/schemas/avro/message/info","type":"object","title":"messageInfo","description":"","required":[],"properties":{"content":{"$id":"#/string","type":"string","title":"string","description":""},"channel":{"$id":"#/string","type":"string","title":"string","description":""}}}
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"$id": "#/io/knack/avro/message/info",
+	"type": "object",
+	"title": "messageInfo",
+	"description": "",
+	"required": ["content"],
+	"properties": {
+		"content": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+			"description": ""
+		},
+		"channel": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+			"description": "",
+			"default": null
+		}
+	}
+}

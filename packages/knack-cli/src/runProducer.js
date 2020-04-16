@@ -1,11 +1,11 @@
 const fs = require('fs-extra');
 const KnackProducerClient = require('@optum/knack-producer-client');
 
-const tryParse = str => {
+const tryParse = string => {
 	try {
-		return JSON.parse(str);
+		return JSON.parse(string);
 	} catch (_) {
-		return str;
+		return string;
 	}
 };
 
