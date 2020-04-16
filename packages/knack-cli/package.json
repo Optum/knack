@@ -63,7 +63,7 @@
 		}
 	},
 	"dependencies": {
-		"@optum/knack-avro": "^0.4.0",
+		"@optum/knack-avro": "^0.5.0",
 		"@optum/knack-consumer-client": "^0.4.0",
 		"@optum/knack-producer": "^0.5.0",
 		"@optum/knack-producer-client": "^0.4.0",

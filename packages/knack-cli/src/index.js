@@ -6,6 +6,7 @@ const runProducer = require('./runProducer');
 const verifyAvroSchema = require('./verifyAvroSchema');
 const checkKafka = require('./checkKafka');
 const convertAvsc = require('./convertAvsc');
+const convertJson = require('./convertJson');
 const {meowHalp} = require('./utils');
 
 const defaultCount = 1;
@@ -38,6 +39,12 @@ const meowOptions = {
 			commands: ['register-avro-schema', 'verify-avro-schema', 'convert-avsc'],
 			type: 'string',
 			alias: 'a',
+			required: true
+		},
+		json: {
+			commands: ['convert-json'],
+			type: 'string',
+			alias: 'j',
 			required: true
 		},
 		consumerConfig: {
@@ -116,7 +123,7 @@ const meowOptions = {
 			description: 'target format: es (elastic mapping), json (json schema)'
 		},
 		output: {
-			command: 'convert-avsc',
+			commands: ['convert-avsc', 'convert-json'],
 			type: 'string',
 			alias: 'o',
 			required: true,
@@ -147,6 +154,10 @@ const meowOptions = {
 		'convert-avsc': {
 			action: convertAvsc,
 			description: 'convert an avsc to other formats'
+		},
+		'convert-json': {
+			action: convertJson,
+			description: 'convert an json schema to avro'
 		}
 	}
 };
@@ -191,5 +202,6 @@ module.exports = {
 	runProducer,
 	verifyAvroSchema,
 	checkKafka,
-	convertAvsc
+	convertAvsc,
+	convertJson
 };
