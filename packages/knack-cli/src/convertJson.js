@@ -9,8 +9,8 @@ const main = async ({json: jsonSchemaPath, output: outputPath}) => {
 	const content = jsonSchemaToAvsc(jsonSchema);
 
 	await fsExtra.outputJson(outputPath, content, {
-        spaces: 4
-    });
+		spaces: 4
+	});
 
 	return {
 		message: `json schema converted to avro & output to ${outputPath}`

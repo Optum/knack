@@ -24,8 +24,8 @@ const main = async ({avsc: avscPath, format, output: outputPath}) => {
 	const content = formats[format].converter(avroSchema);
 
 	await fsExtra.outputJson(outputPath, content, {
-        spaces: 4
-    });
+		spaces: 4
+	});
 
 	return {
 		message: `avsc converted to ${format} & output to ${outputPath}`
