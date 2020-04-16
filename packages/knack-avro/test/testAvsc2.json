@@ -1,0 +1,41 @@
+{
+	"type": "record",
+	"name": "Item",
+	"doc": "The schema for item info.",
+	"fields": [
+		{
+			"type": "string",
+			"name": "id",
+			"doc": "The unique identifier of the item."
+		},
+		{
+			"type": "string",
+			"name": "name",
+			"doc": "The display name of the item."
+		},
+		{
+			"type": "string",
+			"name": "url",
+			"doc": "The url of the item."
+		},
+		{
+			"type": ["null", "string"],
+			"name": "thumbnail",
+			"doc": "The thumbnail url of the item.",
+			"default": null
+		},
+		{
+			"type": [
+				"null",
+				{
+					"type": "array",
+					"items": "string"
+				}
+			],
+			"name": "tags",
+			"doc": "Tags for grouping and filtering items.",
+			"default": null
+		}
+	],
+	"namespace": "io.knack.avro"
+}

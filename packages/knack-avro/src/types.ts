@@ -81,15 +81,20 @@ export interface ElasticMappingWrapperType {
     mappings: ElasticMappingType
 }
 
-export interface AvroSchemaType {
-    type: string | string[]
+export type AvroUnionType = string | BaseAvroSchemaType | AvroSchemaType
+
+export interface BaseAvroSchemaType {
+    type: string | string[] | AvroUnionType[]
+    symbols?: string[]
+    fields?: AvroSchemaType[]
+    items?: string | AvroSchemaType
+}
+
+export interface AvroSchemaType extends BaseAvroSchemaType {
     name: string
     doc?: string
     namespace?: string
     default?: string | number | boolean | null
-    symbols?: string[]
-    fields?: AvroSchemaType[]
-    items?: AvroSchemaType
 }
 
 export interface JsonSchemaExtra {

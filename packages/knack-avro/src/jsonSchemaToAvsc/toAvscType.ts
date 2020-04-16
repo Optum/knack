@@ -54,8 +54,30 @@ export const toAvroSchemaType = (
             )
         }
 
+        const baseType = fromBaseType(jsonSchemaType, 'array', extra)
+
+        if (baseType.default === null) {
+            const itemsType = toAvroSchemaType(arrayType.items, extra)
+            let itemType: any = ''
+
+            if (Array.isArray(itemsType.type)) {
+                itemType = itemsType.type[itemsType.type.length - 1]
+            } else {
+                itemType = itemsType.type
+            }
+
+            baseType.type = [
+                'null',
+                {
+                    type: 'array',
+                    items: itemType
+                }
+            ]
+            return baseType
+        }
+
         return {
-            ...fromBaseType(jsonSchemaType, 'array', extra),
+            ...baseType,
             items: toAvroSchemaType(arrayType.items, extra)
         }
     }
