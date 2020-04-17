@@ -6,12 +6,12 @@ const main = async ({avsc: avscPath, data: dataPath, show}) => {
 	const dataJson = await fs.readJson(dataPath);
 	const placeHolderSchemaId = 123;
 
-	const msgBuffer = toAvroBuffer(dataJson, avscSchemaJson, placeHolderSchemaId);
+	const messageBuffer = toAvroBuffer(dataJson, avscSchemaJson, placeHolderSchemaId);
 
-	let message = `validated data with a resulting buffer length of ${msgBuffer.length}`;
+	let message = `validated data with a resulting buffer length of ${messageBuffer.length}`;
 
 	if (show) {
-		const {value} = fromAvroBuffer(avscSchemaJson, msgBuffer);
+		const {value} = fromAvroBuffer(avscSchemaJson, messageBuffer);
 		message += `\n${JSON.stringify(value, null, 2)}`;
 	}
 

@@ -31,8 +31,8 @@ const defaultTopicConfig = {
 const readFileAsJson = async filePath => {
 	try {
 		// NOTE: could also load the path as a module to support functions like event_cb
-		const configStr = await readFileAsync(filePath);
-		return JSON.parse(configStr);
+		const configString = await readFileAsync(filePath);
+		return JSON.parse(configString);
 	} catch (_) {}
 };
 
@@ -124,8 +124,8 @@ const connect = async config => {
 			reject(error);
 		});
 
-		consumer.on('event.log', msg => {
-			log.debug(msg);
+		consumer.on('event.log', message => {
+			log.debug(message);
 		});
 
 		consumer.connect();

@@ -1,6 +1,6 @@
 {
 	"name": "@optum/knack-consumer",
-	"version": "0.4.0",
+	"version": "1.0.0",
 	"description": "A module for consuming messages from Apache Kafka.",
 	"license": "Apache-2.0",
 	"licenses": [
@@ -43,7 +43,7 @@
 		"nyc": "^15.0.0",
 		"proxyquire": "^2.1.3",
 		"sinon": "^9.0.0",
-		"xo": "^0.27.2"
+		"xo": "^0.29.1"
 	},
 	"nyc": {
 		"reporter": [

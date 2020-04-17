@@ -27,8 +27,8 @@ const defaultTopicConfig = {
 const readFileAsJson = async filePath => {
 	try {
 		// NOTE: could also load the path as a module to support functions like event_cb
-		const configStr = await readFileAsync(filePath);
-		return JSON.parse(configStr);
+		const configString = await readFileAsync(filePath);
+		return JSON.parse(configString);
 	} catch (_) {}
 };
 

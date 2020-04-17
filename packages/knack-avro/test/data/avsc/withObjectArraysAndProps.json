@@ -1,0 +1,96 @@
+{
+	"type": "record",
+	"name": "Item",
+	"doc": "The schema for item info.",
+	"fields": [
+		{
+			"type": "string",
+			"name": "id",
+			"doc": "The unique identifier of the item."
+		},
+		{
+			"type": "string",
+			"name": "name",
+			"doc": "The display name of the item."
+		},
+		{
+			"name": "info",
+			"doc": "The info for the item.",
+			"type": {
+				"type": "record",
+				"name": "info",
+				"fields": [
+					{
+						"type": "long",
+						"name": "timestamp",
+						"doc": "The info timestamp."
+					},
+					{
+						"type": "boolean",
+						"name": "active",
+						"doc": "The info active flag"
+					},
+					{
+						"type": [
+							"null",
+							"string"
+						],
+						"name": "notes",
+						"doc": "The display name of the item.",
+						"default": null
+					}
+				]
+			}
+		},
+		{
+			"type": [
+				"null",
+				{
+					"type": "array",
+					"items": "string"
+				}
+			],
+			"name": "tags",
+			"doc": "Tags for grouping and filtering items.",
+			"default": null
+		},
+		{
+			"type": [
+				"null",
+				{
+					"type": "array",
+					"name": "box",
+					"doc": "A item box.",
+					"items": {
+						"type": "record",
+						"name": "boxRecord",
+						"fields": [
+							{
+								"type": "int",
+								"name": "height",
+								"doc": "The box height."
+							},
+							{
+								"type": "int",
+								"name": "width",
+								"doc": "The box width."
+							},
+							{
+								"type": [
+									"null",
+									"string"
+								],
+								"name": "color",
+								"doc": "The box color.",
+								"default": null
+							}
+						]
+					}
+				}
+			],
+			"name": "boxes",
+			"doc": "Boxes this item supports"
+		}
+	],
+	"namespace": "io.knack.avro"
+}

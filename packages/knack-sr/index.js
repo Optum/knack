@@ -32,9 +32,9 @@ class SchemaRegistry {
 	}
 
 	async registerSchema({subject, schema}) {
-		let strSchema = schema;
+		let stringSchema = schema;
 		if (typeof schema !== 'string') {
-			strSchema = JSON.stringify(schema);
+			stringSchema = JSON.stringify(schema);
 		}
 
 		const options = {
@@ -42,7 +42,7 @@ class SchemaRegistry {
 				'Content-Type': 'application/vnd.schemaregistry.v1+json'
 			},
 			body: {
-				schema: strSchema
+				schema: stringSchema
 			},
 			responseType: 'json',
 			resolveBodyOnly: true
