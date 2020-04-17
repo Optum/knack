@@ -36,21 +36,27 @@ $ knack --help
 
   command register-avro-schema
       options
-      --avsc alias --a string 
+      --avsc alias --a string avro schema input
       --topic alias --t [string] 
       --type alias --ty string subject type (i.e. key or value)
   
   command verify-avro-schema
       options
-      --avsc alias --a string 
+      --avsc alias --a string avro schema input
       --data alias --d string path to json file containing data
       --show alias --s [string] show data after encode -> decode
   
   command convert-avsc
   convert an avsc to other formats
       options
-      --avsc alias --a string 
+      --avsc alias --a string avro schema input
       --format alias --f string target format: es (elastic mapping), json (json schema)
+      --output alias --o string file output path
+  
+  command convert-json
+  convert a json schema to avro
+      options
+      --json alias --j string json schema input
       --output alias --o string file output path
   
   command consume

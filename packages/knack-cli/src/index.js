@@ -159,7 +159,7 @@ const meowOptions = {
 		},
 		'convert-json': {
 			action: convertJson,
-			description: 'convert an json schema to avro'
+			description: 'convert a json schema to avro'
 		}
 	}
 };
