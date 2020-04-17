@@ -1,6 +1,6 @@
 {
 	"name": "@optum/knack-consumer-client",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "A module for consuming records with Apache Kafka.",
 	"license": "Apache-2.0",
 	"licenses": [
@@ -33,7 +33,7 @@
 		"kafka"
 	],
 	"dependencies": {
-		"@optum/knack-avro": "^1.4.0",
+		"@optum/knack-avro": "^1.4.1",
 		"@optum/knack-consumer": "^1.0.0",
 		"@optum/knack-sr": "^1.0.0",
 		"quick-lru": "^5.0.0"
