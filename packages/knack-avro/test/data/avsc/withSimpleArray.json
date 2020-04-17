@@ -29,7 +29,7 @@
 				"null",
 				{
 					"type": "array",
-					"items": "string"
+                    "items": "string"
 				}
 			],
 			"name": "tags",

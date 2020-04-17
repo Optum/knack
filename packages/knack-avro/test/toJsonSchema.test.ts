@@ -4,8 +4,13 @@ import fs from 'fs-extra'
 import avsc from 'avsc'
 import {toJsonSchema} from '../src'
 
-const testAvscFilePath = join(__dirname, 'testAvsc.json')
-const testJsonSchemaFilePath = join(__dirname, 'testJsonSchema.json')
+const testAvscFilePath = join(__dirname, 'data', 'avsc', 'withSimpleArray.json')
+const testJsonSchemaFilePath = join(
+    __dirname,
+    'data',
+    'jsonSchema',
+    'fromAvscWithSimpleArray.json'
+)
 
 test('create json schema from avsc type as expected', async (t) => {
     const avscTypeJson = await fs.readJson(testAvscFilePath)

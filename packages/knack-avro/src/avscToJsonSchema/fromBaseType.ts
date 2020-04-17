@@ -1,12 +1,11 @@
-import {Type} from 'avsc'
 import slugify from '@sindresorhus/slugify'
-import {JsonSchemaType} from '../types'
+import {JsonSchemaType, TypeWithAltDoc} from '../types'
 
 export const fromBaseType = (
-    type: Type,
-    typeName?: string,
-    defaultValue?: any
+    typeWithAltDoc: TypeWithAltDoc,
+    typeName?: string
 ): JsonSchemaType => {
+    const {type} = typeWithAltDoc
     const nTypeName =
         type.name && type.name.includes('.')
             ? type.name.split('.')[type.name.split('.').length - 1]
@@ -18,7 +17,6 @@ export const fromBaseType = (
         })}`,
         type: typeName ?? 'string',
         title: `${nTypeName}`,
-        description: type.doc ?? '',
-        default: defaultValue
+        description: type.doc ?? typeWithAltDoc.altDoc ?? ''
     }
 }

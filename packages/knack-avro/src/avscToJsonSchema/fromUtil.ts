@@ -1,45 +1,45 @@
-import {Type, types} from 'avsc'
+import {types} from 'avsc'
 import {fromBaseType} from './fromBaseType'
-import {JsonSchemaType, JsonSchemaEnum} from '../types'
+import {JsonSchemaType, JsonSchemaEnum, TypeWithAltDoc} from '../types'
 
 export const fromBooleanType = (
-    type: Type,
-    defaultValue: any
+    typeWithAltDoc: TypeWithAltDoc
 ): JsonSchemaType => {
-    return fromBaseType(type, 'boolean', defaultValue)
+    return fromBaseType(typeWithAltDoc, 'boolean')
 }
 
-export const fromLongType = (type: Type, defaultValue: any): JsonSchemaType => {
-    return fromBaseType(type, 'number', defaultValue)
+export const fromLongType = (
+    typeWithAltDoc: TypeWithAltDoc
+): JsonSchemaType => {
+    return fromBaseType(typeWithAltDoc, 'number')
 }
 
 export const fromDoubleType = (
-    type: Type,
-    defaultValue: any
+    typeWithAltDoc: TypeWithAltDoc
 ): JsonSchemaType => {
-    return fromBaseType(type, 'number', defaultValue)
+    return fromBaseType(typeWithAltDoc, 'number')
 }
 
 export const fromFloatType = (
-    type: Type,
-    defaultValue: any
+    typeWithAltDoc: TypeWithAltDoc
 ): JsonSchemaType => {
-    return fromBaseType(type, 'number', defaultValue)
+    return fromBaseType(typeWithAltDoc, 'number')
 }
 
-export const fromIntType = (type: Type, defaultValue: any): JsonSchemaType => {
-    return fromBaseType(type, 'integer', defaultValue)
+export const fromIntType = (typeWithAltDoc: TypeWithAltDoc): JsonSchemaType => {
+    return fromBaseType(typeWithAltDoc, 'integer')
 }
 
 export const fromStringType = (
-    type: Type,
-    defaultValue: any
+    typeWithAltDoc: TypeWithAltDoc
 ): JsonSchemaType => {
-    return fromBaseType(type, 'string', defaultValue)
+    return fromBaseType(typeWithAltDoc, 'string')
 }
 
-export const fromNullType = (type: Type): JsonSchemaType => {
-    return fromBaseType(type, 'null')
+export const fromNullType = (
+    typeWithAltDoc: TypeWithAltDoc
+): JsonSchemaType => {
+    return fromBaseType(typeWithAltDoc, 'null')
 }
 
 // const fromFixedType = (type: avsc.types.FixedType): JsonType => {
@@ -50,11 +50,11 @@ export const fromNullType = (type: Type): JsonSchemaType => {
 // }
 
 export const fromEnumType = (
-    type: types.EnumType,
-    defaultValue?: any
+    typeWithAltDoc: TypeWithAltDoc
 ): JsonSchemaEnum => {
+    const type = typeWithAltDoc.type as types.EnumType
     return {
         enum: type.symbols,
-        ...fromBaseType(type, 'string', defaultValue)
+        ...fromBaseType(typeWithAltDoc, 'string')
     }
 }

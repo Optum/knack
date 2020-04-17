@@ -5,8 +5,13 @@ import {fromAvroBuffer, toAvroBuffer} from '../src'
 import {MappedDecoded} from '../src/types'
 import {TestData} from './types'
 
-const testAvscFilePath = join(__dirname, 'testAvsc.json')
-const testDataWithNullsFilePath = join(__dirname, 'testDataWithNulls.json')
+const testAvscFilePath = join(__dirname, 'data', 'avsc', 'basic.json')
+const testDataWithNullsFilePath = join(
+    __dirname,
+    'data',
+    'ed',
+    'withNulls.json'
+)
 
 test('encode decode data with null defaults', async (t) => {
     const avscSchemaJson = await fs.readJson(testAvscFilePath)

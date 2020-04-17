@@ -111,3 +111,8 @@ export interface ToJsonSchemaFieldsResult {
     result: JsonType
     required?: string[]
 }
+
+export interface TypeWithAltDoc {
+    type: Type
+    altDoc?: string
+}

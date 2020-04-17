@@ -1,0 +1,46 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"$id": "#/io/knack/avro/item",
+	"type": "object",
+	"title": "Item",
+	"description": "The schema for item info.",
+	"required": ["id", "name", "url"],
+	"properties": {
+		"id": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+			"description": "The unique identifier of the item."
+		},
+		"name": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+			"description": "The display name of the item."
+		},
+		"url": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+			"description": "The url of the item."
+		},
+		"thumbnail": {
+			"$id": "#/string",
+			"type": "string",
+			"title": "string",
+            "description": "The thumbnail url of the item."
+		},
+		"tags": {
+			"$id": "#/array",
+			"type": "array",
+			"title": "array",
+			"description": "Tags for grouping and filtering items.",
+			"items": {
+				"$id": "#/string",
+				"type": "string",
+				"title": "string",
+				"description": ""
+			}
+		}
+	}
+}

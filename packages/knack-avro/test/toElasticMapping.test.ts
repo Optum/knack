@@ -4,8 +4,8 @@ import fs from 'fs-extra'
 import avsc from 'avsc'
 import {toElasticMapping} from '../src'
 
-const testAvscFilePath = join(__dirname, 'testAvsc.json')
-const testEsMappingsFilePath = join(__dirname, 'testEsMapping.json')
+const testAvscFilePath = join(__dirname, 'data', 'avsc', 'basic.json')
+const testEsMappingsFilePath = join(__dirname, 'data', 'es', 'basic.json')
 
 test('create elastic mapping from avsc type as expected', async (t) => {
     const avscTypeJson = await fs.readJson(testAvscFilePath)

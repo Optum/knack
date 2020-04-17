@@ -1,4 +1,4 @@
-import avsc, {types, Type} from 'avsc'
+import avsc, {types} from 'avsc'
 import {fromBaseType} from './fromBaseType'
 import {
     fromEnumType,
@@ -10,7 +10,12 @@ import {
     fromLongType,
     fromBooleanType
 } from './fromUtil'
-import {JsonType, ToJsonSchemaResult, ToJsonSchemaFieldsResult} from '../types'
+import {
+    JsonType,
+    ToJsonSchemaResult,
+    ToJsonSchemaFieldsResult,
+    TypeWithAltDoc
+} from '../types'
 
 const fromFields = (
     fields: types.Field[],
@@ -20,7 +25,12 @@ const fromFields = (
     const jsonProps: JsonType = {}
     for (const field of fields) {
         const jsonField = jsonFields.find((f) => f.name === field.name)
-        const jst = toJsonSchemaType(field.type, jsonField?.default)
+        const withAltDoc: TypeWithAltDoc = {
+            type: field.type,
+            altDoc: jsonField?.doc
+        }
+
+        const jst = toJsonSchemaType(withAltDoc)
         jsonProps[field.name] = jst.result
 
         if (jst.required) {
@@ -35,15 +45,15 @@ const fromFields = (
 }
 
 export const toJsonSchemaType = (
-    avscType: Type,
-    defaultValue?: any
+    typeWithAltDoc: TypeWithAltDoc
 ): ToJsonSchemaResult => {
+    const {type: avscType} = typeWithAltDoc
     if (avscType instanceof avsc.types.RecordType) {
         const json = avscType.toJSON() as JsonType
         const jstfResult = fromFields(avscType.fields, json.fields)
         return {
             result: {
-                ...fromBaseType(avscType, 'object'),
+                ...fromBaseType(typeWithAltDoc, 'object'),
                 required: jstfResult.required,
                 properties: jstfResult.result
             }
@@ -51,10 +61,12 @@ export const toJsonSchemaType = (
     }
 
     if (avscType instanceof avsc.types.ArrayType) {
-        const jst = toJsonSchemaType(avscType.itemsType, defaultValue)
+        const jst = toJsonSchemaType({
+            type: avscType.itemsType
+        })
         return {
             result: {
-                ...fromBaseType(avscType, 'array'),
+                ...fromBaseType(typeWithAltDoc, 'array'),
                 items: jst.result
             }
         }
@@ -62,7 +74,7 @@ export const toJsonSchemaType = (
 
     if (avscType instanceof avsc.types.EnumType) {
         return {
-            result: fromEnumType(avscType, defaultValue)
+            result: fromEnumType(typeWithAltDoc)
         }
     }
 
@@ -76,10 +88,10 @@ export const toJsonSchemaType = (
     //     return fromFixedType(avscType)
     // }
     if (avscType instanceof avsc.types.UnwrappedUnionType) {
-        const jsr = toJsonSchemaType(
-            avscType.types[avscType.types.length - 1],
-            defaultValue
-        )
+        const jsr = toJsonSchemaType({
+            type: avscType.types[avscType.types.length - 1],
+            altDoc: typeWithAltDoc.altDoc
+        })
         if (avscType.types[0] instanceof avsc.types.NullType) {
             return {
                 result: jsr.result,
@@ -94,10 +106,10 @@ export const toJsonSchemaType = (
     }
 
     if (avscType instanceof avsc.types.WrappedUnionType) {
-        const jsr = toJsonSchemaType(
-            avscType.types[avscType.types.length - 1],
-            defaultValue
-        )
+        const jsr = toJsonSchemaType({
+            type: avscType.types[avscType.types.length - 1],
+            altDoc: typeWithAltDoc.altDoc
+        })
         if (avscType.types[0] instanceof avsc.types.NullType) {
             return {
                 result: jsr.result,
@@ -113,53 +125,53 @@ export const toJsonSchemaType = (
 
     if (avscType instanceof avsc.types.NullType) {
         return {
-            result: fromNullType(avscType)
+            result: fromNullType(typeWithAltDoc)
         }
     }
 
     if (avscType instanceof avsc.types.StringType) {
         return {
-            result: fromStringType(avscType, defaultValue),
+            result: fromStringType(typeWithAltDoc),
             required: true
         }
     }
 
     if (avscType instanceof avsc.types.IntType) {
         return {
-            result: fromIntType(avscType, defaultValue),
+            result: fromIntType(typeWithAltDoc),
             required: true
         }
     }
 
     if (avscType instanceof avsc.types.FloatType) {
         return {
-            result: fromFloatType(avscType, defaultValue),
+            result: fromFloatType(typeWithAltDoc),
             required: true
         }
     }
 
     if (avscType instanceof avsc.types.DoubleType) {
         return {
-            result: fromDoubleType(avscType, defaultValue),
+            result: fromDoubleType(typeWithAltDoc),
             required: true
         }
     }
 
     if (avscType instanceof avsc.types.LongType) {
         return {
-            result: fromLongType(avscType, defaultValue),
+            result: fromLongType(typeWithAltDoc),
             required: true
         }
     }
 
     if (avscType instanceof avsc.types.BooleanType) {
         return {
-            result: fromBooleanType(avscType, defaultValue),
+            result: fromBooleanType(typeWithAltDoc),
             required: true
         }
     }
 
     return {
-        result: fromBaseType(avscType, defaultValue)
+        result: fromBaseType(typeWithAltDoc)
     }
 }
