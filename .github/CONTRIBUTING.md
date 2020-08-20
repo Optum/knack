@@ -7,9 +7,9 @@
 
 We're thrilled that you'd like to contribute to this project. Your support of this project directly contributes the mission of Optum and UHG to help people live healthier lives and to help make the health system work better for everyone.
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.  Please review our [Individual Contributor License Agreement ("ICL")](/docs/INDIVIDUAL_CONTRIBUTOR_LICENSE.md) prior to submitting changes to the project.
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.  Please review our [Contributor License Agreement ("CLA")](/docs/INDIVIDUAL_CONTRIBUTOR_LICENSE.md) prior to submitting changes to the project.
 
-> :bulb:  Our ICL requires contributors to `sign-off` on each commit.  Adding an alias to the project will make this easier. ```git config --local format.signoff true``` 
+> :bulb:  The first time you open a pull request in this repository, you will see a comment on your PR with a link that will allow you to sign our Contributor License Agreement (CLA) if necessary.
 
 ### Pull Requests
 
@@ -24,14 +24,12 @@ Please follow these steps to have your contribution considered by the maintainer
 
 1. [Fork][fork] and clone the repository
 1. Make your change
-      1. Sign-off every commit `git commit --signoff` or `git commit -s`, as directed by the [ICL](/docs/INDIVIDUAL_CONTRIBUTOR_LICENSE.md).
-
-> :grey_exclamation: If you forget to sign a commit, then you'll have to do a bit of rewriting history. If it's the latest commit, you can just run either `git commit -a -s` or `git commit --amend --signoff` to fix things. It gets a little trickier if you have to change something farther back in history but there are some good instructions [on this page](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History) in the Changing Multiple Commit Messages section.
-
 3. Push to your fork and [submit a pull request](https://help.github.com/en/articles/creating-a-pull-request)
 1. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
 1. Follow the [styleguides](#styleguides)
 1. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing.
+1. The first time you open a pull request in this repository, you will see a comment on your PR with a link that will allow you to sign our Contributor License Agreement (CLA) if necessary.
+> :bulb: The link will take you to a page that allows you to view our CLA.  You will need to click the `Sign in with GitHub to agree button` and authorize the cla-assistant application to access the email addresses associated with your GitHub account.  Agreeing to the CLA is also considered to be an attestation that you either wrote or have the rights to contribute the code.  All committers to the PR branch will be required to sign the CLA, but you will only need to sign once.  This CLA applies to all repositories in the Optum org.
 
 ### What to expect next
 
