@@ -4,4 +4,4 @@ yarn.lock
 coverage
 .DS_Store
 lerna-debug.log
-.vscode
+.vscode.git/
