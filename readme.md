@@ -1,3 +1,8 @@
+# Archived Repository
+
+Thanks for your interest in Optum’s knack project! Unfortunately, we have moved on and this project is no longer actively maintained or monitored by our Open Source Program Office. This copy is provided for reference only. Please fork the code if you are interested in further development. The project and all artifacts including code and documentation remain subject to use and reference under the terms and conditions of the open source license indicated. All copyrights reserved.
+
+
 <p align="center">
   <a href="https://kafka.apache.org/">
     <img alt="knack" src=".github/assets/knack-banner.png">
